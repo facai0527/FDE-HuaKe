@@ -1,0 +1,48 @@
+
+> fde-team-site@0.1.0 dev
+> vite --host 127.0.0.1
+
+
+  VITE v5.4.21  ready in 266 ms
+
+  ➜  Local:   http://127.0.0.1:5173/
+  ➜  press h + enter to show help
+17:20:06 [vite] hmr update /src/styles.css
+17:21:29 [vite] hmr update /src/styles.css
+17:27:48 [vite] hmr update /src/App.jsx
+17:29:00 [vite] hmr update /src/styles.css
+17:43:04 [vite] changed tsconfig file detected: D:\1pro\9-29\.tmp-superdesign\tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+17:47:58 [vite] hmr update /src/App.jsx
+17:49:00 [vite] hmr update /src/styles.css
+17:55:55 [vite] changed tsconfig file detected: D:\1pro\9-29\.tmp-superdesign\tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+17:58:00 [vite] page reload index.html
+18:01:39 [vite] hmr update /src/App.jsx
+18:21:16 [vite] hmr update /src/styles.css
+18:27:26 [vite] hmr update /src/App.jsx
+18:27:53 [vite] ✨ new dependencies optimized: motion/react
+18:27:53 [vite] ✨ optimized dependencies changed. reloading
+18:29:07 [vite] hmr update /src/pages/HomePage.jsx
+18:29:07 [vite] hmr update /src/pages/HomePage.css
+18:30:08 [vite] hmr update /src/components/AccordionGallery.jsx
+18:30:08 [vite] hmr update /src/components/AccordionGallery.css
+18:30:08 [vite] hmr update /src/pages/ProjectsPage.css
+18:35:35 [vite] hmr update /src/pages/ProjectsPage.jsx
+18:35:35 [vite] hmr update /src/pages/StudentCasesPage.jsx
+18:35:35 [vite] hmr update /src/pages/AboutPage.jsx
+18:43:22 [vite] hmr update /src/pages/HomePage.jsx
+18:43:22 [vite] hmr update /src/pages/HomePage.css
+18:56:24 [vite] page reload .superdesign/tmp/site-navigation.html
+18:58:02 [vite] page reload .superdesign/tmp/student-cases-baseline.html
+19:00:34 [vite] hmr update /src/pages/StudentCasesPage.jsx
+19:01:48 [vite] hmr update /src/pages/StudentCasesPage.jsx
+19:05:15 [vite] hmr update /src/pages/StudentCasesPage.css
+19:07:05 [vite] page reload .superdesign/tmp/student-cases-tickets.html
+19:08:12 [vite] page reload .superdesign/student-cases-draft.html
+19:28:13 [vite] hmr update /src/pages/HomePage.jsx
+19:28:13 [vite] hmr update /src/pages/HomePage.css
+19:32:07 [vite] hmr update /src/components/LetterGlitch.jsx
+19:34:04 [vite] hmr update /src/pages/HomePage.css
+19:34:31 [vite] hmr update /src/pages/HomePage.jsx
+19:37:32 [vite] hmr update /src/components/LetterGlitch.jsx
+19:39:48 [vite] hmr update /src/pages/HomePage.jsx
+19:39:48 [vite] hmr update /src/pages/HomePage.css

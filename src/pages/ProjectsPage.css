@@ -1,0 +1,13 @@
+.tilted-project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 28px; }
+.tilted-project { display: block; min-width: 0; height: clamp(280px, 28vw, 430px); padding-top: 28px; position: relative; }
+.tilted-project__tag { position: absolute; inset: 0 0 auto; display: flex; justify-content: space-between; color: #64748b; font: 600 10px 'Space Grotesk', 'Noto Sans SC', sans-serif; letter-spacing: .14em; }
+.tilted-project .tilted-card-overlay strong { display: block; font: 500 clamp(1.3rem, 2vw, 2rem)/1.3 'Noto Serif SC', serif; }
+.tilted-project .tilted-card-overlay small { display: block; margin-top: 8px; font-size: 12px; line-height: 1.7; opacity: .8; }
+.projects-footnote { display: flex; justify-content: space-between; gap: 20px; margin-top: 32px; color: #8290a2; font-size: 10px; letter-spacing: .08em; }
+
+@media (max-width: 767px) {
+  .projects-section .section-heading h2 { font-size: clamp(2rem, 9vw, 3.5rem); }
+  .tilted-project-grid { grid-template-columns: 1fr; gap: 28px; }
+  .tilted-project { height: 300px; }
+  .projects-footnote { flex-direction: column; gap: 8px; }
+}

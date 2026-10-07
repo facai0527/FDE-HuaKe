@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "browser": "chrome",
+      "checks": "text-only opening, hand entry, scroll hold, hand exit then copy exit, top boundary, no overlap, fast wheel, all five links, reverse, hash reload, accordion keyboard/hover, wheel over gallery"
+    },
+    {
+      "browser": "Chrome mobile emulation",
+      "checks": "native touch scroll, navigation tap, photo expansion, portrait/tablet resize, no overflow"
+    },
+    {
+      "browser": "Chrome reduced motion",
+      "checks": "static home, normal flow, navigation and live preference cleanup"
+    },
+    {
+      "browser": "edge-wide",
+      "checks": "text-only opening, hand entry, scroll hold, hand exit then copy exit, top boundary, no overlap, fast wheel, all five links, reverse, hash reload, accordion keyboard/hover, wheel over gallery"
+    }
+  ],
+  "errors": []
+}

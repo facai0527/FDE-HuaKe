@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FDE 团队主页，探索团队活动、项目实践、学生案例与团队故事。">
+  <title>FDE 团队</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap');
+    @keyframes reveal-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes line-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes drift { 0%,100% { transform: translate3d(0,0,0) rotate(-8deg); } 50% { transform: translate3d(0,-12px,0) rotate(-6deg); } }
+    @keyframes pulse-ring { 0%,100% { opacity: .25; transform: scale(1); } 50% { opacity: .5; transform: scale(1.025); } }
+    .font-display { font-family: 'Noto Serif SC', serif; }
+    .font-body { font-family: 'Noto Sans SC', sans-serif; }
+    .font-ui { font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif; }
+    .animate-reveal { animation: reveal-up .9s cubic-bezier(.22,1,.36,1) both; }
+    .animate-line { animation: line-grow 1.2s cubic-bezier(.22,1,.36,1) .5s both; transform-origin: left; }
+    .animate-drift { animation: drift 7s ease-in-out infinite; }
+    .animate-ring { animation: pulse-ring 5s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .animate-reveal,.animate-line,.animate-drift,.animate-ring { animation: none; } }
+  </style>
+</head>
+<body>
+  <div class="relative min-h-screen overflow-hidden bg-[#050505] text-white font-body selection:bg-[#1479E8] selection:text-white" data-sd-id="1">
+    <div class="pointer-events-none absolute inset-0 overflow-hidden" data-scroll-expand-stage="true" data-sd-id="1a">
+      <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/projects/fe3b7f8d-7922-443b-a006-8c29b7a9cf1b/content-assets/homepage-fde-ai-hero.png/fde-ai-hero.png" alt="亮色银白 AI 机器人背景" class="absolute inset-0 h-full w-full object-cover object-center" style="clip-path:inset(18% 28% 18% 28% round 24px);transform:scale(1.2)" data-scroll-expand-media="true" data-sd-id="1b">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#050505]/85 via-[#050505]/30 to-transparent" data-scroll-expand-scrim="true" data-sd-id="1c"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/25" data-sd-id="1d"></div>
+    </div>
+    <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:120px_120px]" data-sd-id="2"></div>
+    <div class="pointer-events-none absolute left-[8.3%] top-0 h-full w-px bg-white/[0.06]" data-sd-id="3"></div>
+    <div class="pointer-events-none absolute right-[8.3%] top-0 h-full w-px bg-white/[0.06]" data-sd-id="4"></div>
+
+    <header class="relative z-20 flex h-24 items-center justify-between border-b border-white/[0.14] px-6 md:px-10 xl:px-[8.3vw]" data-sd-id="5">
+      <a id="brand-home-link" href="#home" aria-label="FDE 团队首页" class="flex h-12 w-[104px] items-center justify-center overflow-hidden rounded-sm bg-white transition-transform duration-300 hover:scale-[1.03] focus:outline-none focus:ring-2 focus:ring-[#1479E8] focus:ring-offset-4 focus:ring-offset-[#050505]" data-sd-id="6">
+        <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/projects/fe3b7f8d-7922-443b-a006-8c29b7a9cf1b/brand-assets/brand-logo-fde.png/codex-clipboard-f4f82b79-fdff-4d84-b2da-8e20aaee143c.png" alt="FDE / 华科未来" class="h-full w-full object-contain" data-sd-id="7">
+      </a>
+
+      <nav aria-label="主导航" class="hidden items-center gap-8 lg:flex" data-sd-id="8">
+        <a id="nav-home-link" href="#home" aria-current="page" class="border-b border-white pb-1 text-xs tracking-[0.22em] text-white" data-sd-id="9">首页</a>
+        <a id="nav-activity-link" href="#activity" class="pb-1 text-xs tracking-[0.22em] text-[#999999] transition-colors hover:text-white focus:outline-none focus:text-white" data-sd-id="10">活动场域</a>
+        <a id="nav-projects-link" href="#projects" class="pb-1 text-xs tracking-[0.22em] text-[#999999] transition-colors hover:text-white focus:outline-none focus:text-white" data-sd-id="11">项目</a>
+        <a id="nav-cases-link" href="#student-cases" class="pb-1 text-xs tracking-[0.22em] text-[#999999] transition-colors hover:text-white focus:outline-none focus:text-white" data-sd-id="12">学生案例</a>
+        <a id="nav-about-link" href="#about" class="pb-1 text-xs tracking-[0.22em] text-[#999999] transition-colors hover:text-white focus:outline-none focus:text-white" data-sd-id="13">关于</a>
+      </nav>
+
+      <div class="flex items-center gap-5" data-sd-id="14">
+        <span class="hidden font-ui text-[10px] uppercase tracking-[0.28em] text-[#777777] sm:block" data-sd-id="15">Page 01 / 05</span>
+        <button type="button" aria-label="打开导航菜单" class="flex h-11 w-11 items-center justify-center border border-white/[0.14] text-white transition-colors hover:border-white/40 hover:bg-white hover:text-black lg:hidden" data-sd-id="16">
+          <iconify-icon icon="lucide:menu" class="text-xl"></iconify-icon>
+        </button>
+      </div>
+    </header>
+
+    <main class="relative min-h-[calc(100vh-6rem)] px-6 pb-8 pt-12 md:px-10 md:pt-16 xl:px-[8.3vw] xl:pt-20" data-sd-id="17">
+      <div class="pointer-events-none absolute right-[-9rem] top-[4%] hidden h-[34rem] w-[34rem] rounded-full border border-[#1479E8]/30 xl:block animate-ring" data-sd-id="18"></div>
+      <div class="pointer-events-none absolute right-[-4rem] top-[9%] hidden h-[25rem] w-[25rem] rounded-full border border-white/10 xl:block animate-ring" data-sd-id="19"></div>
+      <div class="pointer-events-none absolute right-[5%] top-[18%] hidden h-[10rem] w-[10rem] rounded-full bg-[#1479E8]/10 blur-3xl xl:block" data-sd-id="20"></div>
+
+      <section class="relative grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8" aria-labelledby="home-heading" data-sd-id="21">
+        <div class="lg:col-span-8" data-sd-id="22">
+          <div class="animate-reveal flex items-center gap-4" style="animation-delay:.05s" data-sd-id="23">
+            <span class="h-2 w-2 rounded-full bg-[#1479E8]" data-sd-id="24"></span>
+            <p class="font-ui text-[11px] uppercase tracking-[0.32em] text-[#999999]" data-sd-id="25">Future · Design · Exploration</p>
+          </div>
+
+          <h1 id="home-heading" class="font-display animate-reveal mt-7 max-w-[950px] text-[3.6rem] font-medium leading-[1.02] tracking-[-0.06em] sm:text-[5.2rem] md:text-[7rem] lg:text-[8.2rem] xl:text-[9.4rem]" style="animation-delay:.14s" data-sd-id="26">
+            FDE
+          </h1>
+
+          <div class="animate-line mt-8 h-px w-full max-w-[820px] bg-gradient-to-r from-[#1479E8] via-white/40 to-transparent" data-sd-id="28"></div>
+        </div>
+
+        <aside class="animate-reveal flex flex-col justify-end lg:col-span-4 lg:pb-6" style="animation-delay:.3s" data-sd-id="29">
+          <div class="max-w-sm border-l border-white/[0.14] pl-6 lg:ml-auto" data-sd-id="30">
+            <p class="font-display text-xl leading-relaxed text-white md:text-2xl" data-sd-id="31">一支与华科未来相连的团队。</p>
+            <p class="mt-4 text-sm leading-7 text-[#999999]" data-sd-id="32">在真实项目、协作实践与持续探索中，让想法逐步成为可以被看见的作品。</p>
+            <a id="hero-explore-link" href="#activity" class="mt-8 inline-flex min-h-12 items-center gap-4 border-b border-white/30 pb-2 font-ui text-xs uppercase tracking-[0.2em] text-white transition-all duration-300 hover:gap-6 hover:border-[#1479E8] focus:outline-none focus:ring-2 focus:ring-[#1479E8] focus:ring-offset-4 focus:ring-offset-[#050505]" data-sd-id="33">
+              开始探索
+              <iconify-icon icon="lucide:arrow-down-right" class="text-lg text-[#1479E8]"></iconify-icon>
+            </a>
+          </div>
+        </aside>
+      </section>
+
+      <section class="relative mt-14 grid grid-cols-1 border-t border-white/[0.14] md:mt-16 md:grid-cols-5" aria-label="站点导览" data-sd-id="34">
+        <a id="index-home-link" href="#home" class="group flex min-h-24 items-center justify-between border-b border-white/[0.14] py-5 md:border-b-0 md:border-r md:px-5" data-sd-id="35">
+          <span data-sd-id="36"><span class="font-ui text-[10px] text-[#1479E8]" data-sd-id="37">01</span><span class="ml-4 text-sm text-white" data-sd-id="38">首页</span></span>
+          <span class="h-1.5 w-1.5 rounded-full bg-[#1479E8]" data-sd-id="39"></span>
+        </a>
+        <a id="index-activity-link" href="#activity" class="group flex min-h-24 items-center justify-between border-b border-white/[0.14] py-5 md:border-b-0 md:border-r md:px-5" data-sd-id="40">
+          <span data-sd-id="41"><span class="font-ui text-[10px] text-[#666666]" data-sd-id="42">02</span><span class="ml-4 text-sm text-[#999999] transition-colors group-hover:text-white" data-sd-id="43">活动场域</span></span>
+          <iconify-icon icon="lucide:arrow-up-right" class="text-base text-[#555555] transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white"></iconify-icon>
+        </a>
+        <a id="index-projects-link" href="#projects" class="group flex min-h-24 items-center justify-between border-b border-white/[0.14] py-5 md:border-b-0 md:border-r md:px-5" data-sd-id="44">
+          <span data-sd-id="45"><span class="font-ui text-[10px] text-[#666666]" data-sd-id="46">03</span><span class="ml-4 text-sm text-[#999999] transition-colors group-hover:text-white" data-sd-id="47">项目</span></span>
+          <iconify-icon icon="lucide:arrow-up-right" class="text-base text-[#555555] transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white"></iconify-icon>
+        </a>
+        <a id="index-cases-link" href="#student-cases" class="group flex min-h-24 items-center justify-between border-b border-white/[0.14] py-5 md:border-b-0 md:border-r md:px-5" data-sd-id="48">
+          <span data-sd-id="49"><span class="font-ui text-[10px] text-[#666666]" data-sd-id="50">04</span><span class="ml-4 text-sm text-[#999999] transition-colors group-hover:text-white" data-sd-id="51">学生案例</span></span>
+          <iconify-icon icon="lucide:arrow-up-right" class="text-base text-[#555555] transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white"></iconify-icon>
+        </a>
+        <a id="index-about-link" href="#about" class="group flex min-h-24 items-center justify-between py-5 md:px-5" data-sd-id="52">
+          <span data-sd-id="53"><span class="font-ui text-[10px] text-[#666666]" data-sd-id="54">05</span><span class="ml-4 text-sm text-[#999999] transition-colors group-hover:text-white" data-sd-id="55">关于</span></span>
+          <iconify-icon icon="lucide:arrow-up-right" class="text-base text-[#555555] transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white"></iconify-icon>
+        </a>
+      </section>
+
+      <div class="mt-6 flex items-end justify-between font-ui text-[9px] uppercase tracking-[0.24em] text-[#555555]" data-sd-id="56">
+        <span data-sd-id="57">FDE Team · 2025</span>
+        <span class="hidden sm:block" data-sd-id="58">Scroll to continue <iconify-icon icon="lucide:arrow-down" class="ml-2 align-middle text-xs"></iconify-icon></span>
+      </div>
+    </main>
+  </div>
+
+</body></html>

@@ -1,0 +1,289 @@
+{
+  "scope": "Optimized approved v5/v7 raster assets only; original source images untouched; no src edits",
+  "created": "2026-10-07",
+  "assets": [
+    {
+      "name": "home",
+      "url": "/assets/story-worlds/home.webp",
+      "file": "D:\\1pro\\9-29\\public\\assets\\story-worlds\\home.webp",
+      "source": "C:/Users/Facai/.codex/visualizations/2026/10/05/01a10cc2-a976-7833-b852-90f6fae3b26c/creation-ai-v5/worlds.png",
+      "sourcePixels": [
+        1774,
+        887
+      ],
+      "crop": null,
+      "pixels": [
+        1774,
+        887
+      ],
+      "bytes": 171474,
+      "sourceBytes": 2257731,
+      "hasAlpha": false,
+      "alphaMin": 255,
+      "alphaMax": 255,
+      "alphaExact": null,
+      "quality": 84
+    },
+    {
+      "name": "nature",
+      "url": "/assets/story-worlds/nature.webp",
+      "file": "D:\\1pro\\9-29\\public\\assets\\story-worlds\\nature.webp",
+      "source": "C:/Users/Facai/.codex/visualizations/2026/10/05/01a10cc2-a976-7833-b852-90f6fae3b26c/creation-ai-v7/activity-nature-world.png",
+      "sourcePixels": [
+        1774,
+        887
+      ],
+      "crop": null,
+      "pixels": [
+        1774,
+        887
+      ],
+      "bytes": 440258,
+      "sourceBytes": 3372592,
+      "hasAlpha": false,
+      "alphaMin": 255,
+      "alphaMax": 255,
+      "alphaExact": null,
+      "quality": 84
+    },
+    {
+      "name": "machine",
+      "url": "/assets/story-worlds/machine.webp",
+      "file": "D:\\1pro\\9-29\\public\\assets\\story-worlds\\machine.webp",
+      "source": "C:/Users/Facai/.codex/visualizations/2026/10/05/01a10cc2-a976-7833-b852-90f6fae3b26c/creation-ai-v7/projects-machine-world.png",
+      "sourcePixels": [
+        1774,
+        887
+      ],
+      "crop": null,
+      "pixels": [
+        1774,
+        887
+      ],
+      "bytes": 277182,
+      "sourceBytes": 2793986,
+      "hasAlpha": false,
+      "alphaMin": 255,
+      "alphaMax": 255,
+      "alphaExact": null,
+      "quality": 84
+    },
+    {
+      "name": "sky",
+      "url": "/assets/story-worlds/sky.webp",
+      "file": "D:\\1pro\\9-29\\public\\assets\\story-worlds\\sky.webp",
+      "source": "C:/Users/Facai/.codex/visualizations/2026/10/05/01a10cc2-a976-7833-b852-90f6fae3b26c/creation-ai-v7/student-sky-world.png",
+      "sourcePixels": [
+        1774,
+        887
+      ],
+      "crop": null,
+      "pixels": [
+        1774,
+        887
+      ],
+      "bytes": 97720,
+      "sourceBytes": 1874023,
+      "hasAlpha": false,
+      "alphaMin": 255,
+      "alphaMax": 255,
+      "alphaExact": null,
+      "quality": 84
+    },
+    {
+      "name": "technology",
+      "url": "/assets/story-worlds/technology.webp",
+      "file": "D:\\1pro\\9-29\\public\\assets\\story-worlds\\technology.webp",
+      "source": "C:/Users/Facai/.codex/visualizations/2026/10/05/01a10cc2-a976-7833-b852-90f6fae3b26c/creation-ai-v7/about-tech-world.png",
+      "sourcePixels": [
+        1774,
+        887
+      ],
+      "crop": null,
+      "pixels": [
+        1774,
+        887
+      ],
+      "bytes": 303344,
+      "sourceBytes": 2812850,
+      "hasAlpha": false,
+      "alphaMin": 255,
+      "alphaMax": 255,
+      "alphaExact": null,
+      "quality": 84
+    },
+    {
+      "name": "nature-edge",
+      "url": "/assets/story-worlds/nature-edge.webp",
+      "file": "D:\\1pro\\9-29\\public\\assets\\story-worlds\\nature-edge.webp",
+      "source": "C:/Users/Facai/.codex/visualizations/2026/10/05/01a10cc2-a976-7833-b852-90f6fae3b26c/creation-ai-v7/nature-transition-edge.png",
+      "sourcePixels": [
+        1040,
+        1000
+      ],
+      "crop": null,
+      "pixels": [
+        1040,
+        1000
+      ],
+      "bytes": 333920,
+      "sourceBytes": 2532514,
+      "hasAlpha": true,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alphaExact": true,
+      "quality": 87
+    },
+    {
+      "name": "machine-edge",
+      "url": "/assets/story-worlds/machine-edge.webp",
+      "file": "D:\\1pro\\9-29\\public\\assets\\story-worlds\\machine-edge.webp",
+      "source": "C:/Users/Facai/.codex/visualizations/2026/10/05/01a10cc2-a976-7833-b852-90f6fae3b26c/creation-ai-v7/machine-transition-edge.png",
+      "sourcePixels": [
+        636,
+        1000
+      ],
+      "crop": null,
+      "pixels": [
+        636,
+        1000
+      ],
+      "bytes": 99536,
+      "sourceBytes": 1291192,
+      "hasAlpha": true,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alphaExact": true,
+      "quality": 87
+    },
+    {
+      "name": "cloud-edge",
+      "url": "/assets/story-worlds/cloud-edge.webp",
+      "file": "D:\\1pro\\9-29\\public\\assets\\story-worlds\\cloud-edge.webp",
+      "source": "C:/Users/Facai/.codex/visualizations/2026/10/05/01a10cc2-a976-7833-b852-90f6fae3b26c/creation-ai-v7/cloud-transition-edge.png",
+      "sourcePixels": [
+        2080,
+        1040
+      ],
+      "crop": null,
+      "pixels": [
+        2080,
+        1040
+      ],
+      "bytes": 199844,
+      "sourceBytes": 3019230,
+      "hasAlpha": true,
+      "alphaMin": 0,
+      "alphaMax": 254,
+      "alphaExact": true,
+      "quality": 87
+    },
+    {
+      "name": "human-hand",
+      "url": "/assets/story-worlds/human-hand.webp",
+      "file": "D:\\1pro\\9-29\\public\\assets\\story-worlds\\human-hand.webp",
+      "source": "D:/1pro/9-29/public/assets/fde-hand-robot-interaction.png",
+      "sourcePixels": [
+        2172,
+        724
+      ],
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 1086,
+        "height": 724
+      },
+      "pixels": [
+        1086,
+        724
+      ],
+      "bytes": 103412,
+      "sourceBytes": 910776,
+      "hasAlpha": true,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alphaExact": true,
+      "quality": 94
+    },
+    {
+      "name": "robot-hand",
+      "url": "/assets/story-worlds/robot-hand.webp",
+      "file": "D:\\1pro\\9-29\\public\\assets\\story-worlds\\robot-hand.webp",
+      "source": "D:/1pro/9-29/public/assets/fde-hand-robot-interaction.png",
+      "sourcePixels": [
+        2172,
+        724
+      ],
+      "crop": {
+        "left": 1086,
+        "top": 0,
+        "width": 1086,
+        "height": 724
+      },
+      "pixels": [
+        1086,
+        724
+      ],
+      "bytes": 94374,
+      "sourceBytes": 910776,
+      "hasAlpha": true,
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "alphaExact": true,
+      "quality": 94
+    }
+  ],
+  "totalBytes": 2121064,
+  "hands": {
+    "original": "D:/1pro/9-29/public/assets/fde-hand-robot-interaction.png",
+    "originalPixels": [
+      2172,
+      724
+    ],
+    "leftCrop": [
+      0,
+      0,
+      1086,
+      724
+    ],
+    "rightCrop": [
+      1086,
+      0,
+      1086,
+      724
+    ],
+    "referenceViewport": [
+      1600,
+      800
+    ],
+    "referenceCombinedRender": [
+      1920,
+      640
+    ],
+    "referenceLayerRenders": [
+      960,
+      640
+    ],
+    "referenceOffsets": {
+      "human": [
+        -160,
+        56
+      ],
+      "robot": [
+        800,
+        56
+      ]
+    },
+    "referenceTips": {
+      "human": [
+        789,
+        335
+      ],
+      "robot": [
+        807,
+        335
+      ]
+    },
+    "note": "Hand crops keep complete half-canvas. No mirroring, pose editing or reconstruction."
+  }
+}
