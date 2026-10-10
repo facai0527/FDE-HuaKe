@@ -1,42 +1,73 @@
-.story-experience { position: relative; isolation: isolate; min-height: 100vh; min-height: 100dvh; }
-.story-experience .site-shell { position: relative; z-index: 2; background: transparent; }
-.story-experience .site-shell > section { position: relative; isolation: isolate; background: transparent; }
+.story-experience { position: fixed; inset: 0; isolation: isolate; overflow: hidden; color: #e8f0f5; background: #060b10; touch-action: pan-x pinch-zoom; --page-top: clamp(94px, 12dvh, 128px); --scroll-cue-bottom: max(clamp(24px, 4dvh, 36px), env(safe-area-inset-bottom)); --page-bottom: calc(var(--scroll-cue-bottom) + 74px); --page-gutter: clamp(24px, 6vw, 112px); }
+.story-experience .site-shell { position: absolute; inset: 0; z-index: 2; overflow: hidden; background: transparent; }
+.story-experience .site-shell > section { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; max-height: 100%; margin: 0; border: 0; visibility: hidden; opacity: 0; pointer-events: none; isolation: isolate; background: transparent; overflow: hidden; outline: none; }
+.story-experience .site-shell > section:not(.home-scene) { padding: var(--page-top) var(--page-gutter) var(--page-bottom); }
+.story-experience .site-shell > section[data-story-scroll] { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #35527c transparent; }
+.story-experience:has(.is-current [data-story-scroll]),
+.story-experience:has(.is-current[data-story-scroll]) { touch-action: pan-y pinch-zoom; }
+.story-experience .site-shell > section.is-current { visibility: visible; opacity: 1; pointer-events: auto; z-index: 1; }
+.story-experience .site-shell > section.is-entering { visibility: visible; z-index: 2; }
+.story-experience .site-shell > section.is-leaving, .story-experience .site-shell > section.is-entering { will-change: transform, opacity; pointer-events: none; }
 .story-experience .site-shell > section::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-.story-experience .activity-teaser::before { background: linear-gradient(180deg, rgba(251,253,245,.94) 0%, rgba(251,253,245,.90) 25%, rgba(251,253,245,.50) 46%, rgba(251,253,245,.04) 65%, rgba(251,253,245,.34) 100%); }
-.story-experience .projects-section::before { background: linear-gradient(180deg, rgba(246,250,253,.94), rgba(246,250,253,.86) 23%, rgba(246,250,253,.26) 43%, rgba(246,250,253,.24) 90%, rgba(246,250,253,.68)); }
-.story-experience .student-cases-page::before { background: linear-gradient(180deg, rgba(249,252,255,.74), rgba(249,252,255,.63) 26%, rgba(249,252,255,.20) 42%, rgba(249,252,255,.48) 100%); }
-.story-experience .about-teaser::before { background: radial-gradient(ellipse at 50% 40%, rgba(248,253,255,.95) 0%, rgba(248,253,255,.89) 31%, rgba(248,253,255,.52) 60%, rgba(248,253,255,.12) 100%); }
-.story-experience .student-case__details { background: rgba(249,252,255,.88); box-shadow: 0 0 22px 12px rgba(249,252,255,.88); }
-.story-experience .hero { background: transparent; }
+.story-experience .site-shell > section:not(.home-scene)::before { background: rgba(6,11,16,.7); }
+.story-experience .site-shell > :is(#projects, #student-cases, #activity, #about)::before { content: none; background: none; }
+.story-experience .site-shell > #team::before { content: none; background: none; }
+.story-experience .hero { height: 100%; background: transparent; }
 .story-experience .hero-copy { isolation: isolate; }
-.story-experience .hero-copy::before { content: ''; position: absolute; z-index: -1; inset: -15% -22% -25%; pointer-events: none; background: radial-gradient(ellipse, rgba(255,255,255,.94), rgba(255,255,255,.73) 40%, rgba(255,255,255,0) 73%); }
-.story-experience .header-meta { color: #506175; text-shadow: 0 1px 5px #fff, 0 0 12px #fff; }
-.story-travel-hands { position: fixed !important; top: 47svh !important; z-index: 4; opacity: 0; visibility: hidden; }
-.story-travel-hands .hands-layer { transform: none; }
+.story-experience .header-meta { color: #90a6b4; }
+.story-pixel-transition { position: absolute; inset: 0; z-index: 3; height: 100%; pointer-events: none; }
+.story-pixel-transition:not([data-transitioning='true']) { visibility: hidden; }
 .is-story-traveling .site-shell { pointer-events: none; user-select: none; }
-.is-background-pressed { cursor: grabbing; user-select: none; }
-.story-gesture-mark { position: fixed; z-index: 90; width: 42px; height: 42px; margin: -21px 0 0 -21px; opacity: 0; pointer-events: none; border: 1px solid rgba(255,255,255,.85); border-radius: 50%; box-shadow: 0 0 0 1px rgba(65,110,140,.32), 0 0 25px rgba(200,229,255,.3); transition: opacity .15s; }
-.story-gesture-mark i { position: absolute; inset: 8px; border: 1px solid rgba(80,131,168,.7); border-radius: inherit; }
-.story-controls { position: fixed; z-index: 80; left: 22px; right: 22px; bottom: 18px; display: flex; align-items: center; justify-content: space-between; pointer-events: none; }
-.story-controls button { pointer-events: auto; border: 1px solid rgba(255,255,255,.86); color: #354f5e; background: rgba(255,255,255,.82); box-shadow: 0 3px 18px rgba(27,60,78,.08); backdrop-filter: blur(12px); cursor: pointer; }
-.story-direction-cue { display: inline-flex; align-items: center; gap: 12px; padding: 10px 15px; border-radius: 30px; font: 500 11px 'Noto Sans SC', sans-serif; letter-spacing: .08em; }
-.story-direction-cue > span:first-child { font: 19px/1 'Space Grotesk',sans-serif; }
-.story-direction-cue__mobile { display: none; }
-.story-controls button:hover { background: rgba(255,255,255,.96); }
-.story-controls button:focus-visible { outline: 2px solid #2563eb; outline-offset: 4px; }
-.story-controls button:disabled { cursor: default; opacity: .65; }
-.story-motion-toggle { width: 38px; height: 38px; display: grid; place-items: center; padding: 8px; border-radius: 50%; }
-.story-motion-toggle svg { width: 18px; height: 18px; fill: currentColor; }
 .story-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 @media (max-width: 767px) {
-  .story-controls { left: 12px; right: 12px; bottom: 12px; }
-  .story-direction-cue { min-height: 38px; padding: 8px 12px; font-size: 10px; }
-  .story-direction-cue__desktop { display: none; }
-  .story-direction-cue__mobile { display: inline; }
-  .story-travel-hands { top: 43svh !important; }
-  .story-experience .activity-teaser::before { background: linear-gradient(180deg, rgba(251,253,245,.94), rgba(251,253,245,.86) 30%, rgba(251,253,245,.22) 56%, rgba(251,253,245,.25)); }
-  .story-experience .projects-section::before { background: linear-gradient(180deg, rgba(246,250,253,.94), rgba(246,250,253,.83) 21%, rgba(246,250,253,.24) 43%, rgba(246,250,253,.38)); }
+  .story-experience { --page-top: 88px; --page-gutter: 6vw; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .story-gesture-mark { display: none; }
+@media (max-height: 600px) {
+  .story-experience { --page-top: 72px; }
 }
+
+/* Dark opening chapters. */
+.story-experience .site-brand,
+.story-experience .hero-tech-text,
+.story-experience .section-heading h2 { color: #eaf5fa; }
+.story-experience .hero-copy__eyebrow,
+.story-experience .section-kicker,
+.story-experience .tilted-project__tag { color: #94afbd; }
+.story-experience .hero-copy__body,
+.story-experience .section-heading > p:last-child,
+.story-experience .projects-footnote { color: #b4c6d0; }
+.story-experience .hero-copy__link,
+.story-experience .about-teaser__link,
+.story-experience .student-case__actions a,
+.story-experience .student-case__actions button { color: var(--accent); border-color: rgba(var(--accent-rgb), .65); }
+.story-experience .about-teaser__logo { padding: 8px; border-radius: 8px; background: #fff; }
+.story-experience .student-case-dialog .section-kicker { color: #536b82; }
+.chapter-english { display: block; margin: 12px 0 0; color: #94afbd; font: 400 12px/1.5 'Space Grotesk', sans-serif; letter-spacing: .04em; }
+.projects-footnote a, .student-cases-page__footer a, .activity-footer a { color: #9ec0ff; }
+.projects-footnote a:focus-visible, .student-cases-page__footer a:focus-visible, .activity-footer a:focus-visible { outline: 2px solid #82adff; outline-offset: 4px; }
+/* White content chapters keep image treatments and dialog styles independent. */
+.story-experience :is(#student-cases, #activity) { color: #171a1e; }
+.story-experience :is(#student-cases, #activity) .section-kicker,
+.story-experience :is(#student-cases, #activity) .chapter-english { color: #606975; }
+.story-experience .student-cases-page__intro h2,
+.story-experience .student-case__caption,
+.story-experience .activity-intro h2 { color: #171a1e; }
+.story-experience .student-case__caption span,
+.story-experience .student-cases-page__footer,
+.story-experience .activity-gallery-meta,
+.story-experience .student-cases-page__description,
+.story-experience .activity-intro__body { color: #5b6470; }
+.story-experience .student-cases-page__footer a,
+.story-experience .activity-footer a,
+.story-experience .student-case__actions a,
+.story-experience .student-case__actions button { color: #285ed1; }
+.story-experience #about { color: #eaf2ff; }
+.story-experience .about-scene h2 { color: #f0f5ff; }
+.story-experience #about .section-kicker,
+.story-experience #about .chapter-english { color: #9fb5d2; }
+.story-experience .about-teaser__body,
+.story-experience .about-teaser__secondary { color: #acb9cd; }
+.story-experience .about-teaser__link { color: #9cc5ff; border-color: #649cf780; }
+.story-experience .about-lanyard__controls { color: #acb9cd; }
+.story-experience .about-lanyard__controls small { color: #93a2b9; }
+@media (max-height: 600px) { .chapter-english { margin-top: 6px; font-size: 10px; } }

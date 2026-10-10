@@ -1,0 +1,25 @@
+.stroke-text {
+  display: block;
+  width: 100%;
+  line-height: 0;
+}
+
+.stroke-text--hover { cursor: pointer; }
+.stroke-text[data-ready="false"] .stroke-text__svg { visibility: hidden; }
+
+.stroke-text__svg {
+  display: block;
+  width: 100%;
+  height: var(--stroke-text-height, 160px);
+  overflow: visible;
+}
+
+.stroke-text__stroke,
+.stroke-text__fill { user-select: none; }
+
+/* Fill stays hidden until the layout effect installs the wipe/fade state. */
+.stroke-text__fill [data-fill-char] { opacity: 0; }
+
+.stroke-text--metal .stroke-text__svg {
+  filter: drop-shadow(0 3px 2px rgba(0, 0, 0, .45));
+}

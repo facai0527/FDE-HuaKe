@@ -1,74 +1,90 @@
-import TiltedCard from '../components/TiltedCard';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import CardSwap, { Card } from '../components/CardSwap';
+import { useStory } from '../components/StoryContext';
+import ChapterText from '../components/ChapterText';
+import TextType from '../components/TextType';
+import ShinyText from '../components/ShinyText';
 import './ProjectsPage.css';
 
+const projects = [
+  { title: '祈年殿', type: 'WEB EXPERIENCE', image: '/assets/projects/qiniandian.png',
+    alt: '祈年殿网站项目截图', href: 'https://facai0527.github.io/qiniandian/',
+    description: '用交互呈现文化内容，探索让理解与参与更容易的方式。' },
+  { title: '山间一盏', type: 'STORYTELLING', image: '/assets/projects/tea-hero.png', fit: 'contain',
+    alt: '山间一盏茶叶网站项目截图', href: 'https://facai0527.github.io/tea-shichagundong/',
+    description: '从一片茶叶的故事出发，练习内容、视觉与交互的共同表达。' },
+  { title: '小红书自动发布工作台', type: 'PRODUCT', image: '/assets/projects/xiaohongshu-matrix.png',
+    alt: '小红书矩阵运营工作台截图',
+    description: '从具体工作环节出发，探索工具如何协作、流程如何推进。' },
+  { title: 'AIGC视频', type: 'FILM', video: '/assets/projects/fde-project.mp4#t=0.1',
+    description: '记录动手、交流与复盘，让实践中的经验可以被分享。' },
+];
+
 export default function ProjectsPage() {
+  const { activeId, enteringId, isTraveling, reducedMotion } = useStory();
+  const video = useRef(null);
+  const [current, setCurrent] = useState(0);
+  const [videoPlaying, setVideoPlaying] = useState(false);
+  const active = activeId === 'projects';
+  const textActive = active || enteringId === 'projects';
+  const textPaused = isTraveling && enteringId !== 'projects';
+  const typingEffect = { as: 'span', typingSpeed: 100, loop: false,
+    active: textActive, paused: textPaused, reducedMotion };
+  const shineEffect = { color: '#a1a1aa', shineColor: '#ffffff', speed: 1.8,
+    delay: 0.25, shineWidth: 55, softness: 0.45, angle: 110, direction: 'right',
+    easing: 'linear', trigger: 'loop', paused: !textActive || textPaused || reducedMotion };
+  const changeCard = useCallback(index => { setCurrent(index); }, []);
+
+  useEffect(() => {
+    if (!active || current !== 3) video.current?.pause();
+  }, [active, current]);
+
   return (
-    <section className="projects-section" id="projects">
-      <div className="section-heading"><p className="section-kicker">03 / 05 — PROJECTS</p><h2>把想法，做成<br />可以运行的东西。</h2><p>从文化内容到 AI 工具，FDE 团队把探索落在真实的页面、流程和交付物里。</p></div>
-      <div className="tilted-project-grid">
-        <a className="tilted-project tilted-project--feature" href="https://facai0527.github.io/qiniandian/" target="_blank" rel="noreferrer">
-          <div className="tilted-project__tag">01 · WEB EXPERIENCE <span>↗</span></div>
-          <TiltedCard
-            imageSrc="/assets/projects/qiniandian.png"
-            altText="祈年殿网站项目截图"
-            captionText="打开祈年殿网站 ↗"
-            containerHeight="100%"
-            imageHeight="100%"
-            imageWidth="100%"
-            rotateAmplitude={10}
-            scaleOnHover={1.035}
-            overlayContent={<div><strong>祈年殿网站</strong><small>让文化遗产在新的交互里被看见。</small></div>}
-            displayOverlayContent
-          />
-        </a>
-        <a className="tilted-project" href="https://facai0527.github.io/tea-shichagundong/" target="_blank" rel="noreferrer">
-          <div className="tilted-project__tag">02 · STORYTELLING <span>↗</span></div>
-          <TiltedCard
-            imageSrc="/assets/projects/tea.png"
-            altText="山间一盏茶叶网站项目截图"
-            captionText="打开茶叶网站 ↗"
-            containerHeight="100%"
-            imageHeight="100%"
-            imageWidth="100%"
-            rotateAmplitude={12}
-            scaleOnHover={1.05}
-            overlayContent={<div><strong>山间一盏</strong><small>一片茶叶，先在光里醒来。</small></div>}
-            displayOverlayContent
-          />
-        </a>
-        <article className="tilted-project tilted-project--blue">
-          <div className="tilted-project__tag">03 · PRODUCT</div>
-          <TiltedCard
-            imageSrc="/assets/projects/xiaohongshu-matrix.png"
-            altText="小红书矩阵运营工作台截图"
-            captionText="小红书矩阵运营工作台"
-            containerHeight="100%"
-            imageHeight="100%"
-            imageWidth="100%"
-            rotateAmplitude={12}
-            scaleOnHover={1.05}
-            overlayContent={<div><strong>小红书自动发布工作台</strong><small>从内容整理到发布动作，一条链路完成。</small></div>}
-            displayOverlayContent
-          />
-        </article>
-        <article className="tilted-project tilted-project--dark">
-          <div className="tilted-project__tag">04 · FILM</div>
-          <TiltedCard
-            mediaType="video"
-            videoSrc="/assets/projects/fde-project.mp4"
-            altText="FDE 项目纪录视频"
-            captionText="播放 FDE 项目纪录"
-            containerHeight="100%"
-            imageHeight="100%"
-            imageWidth="100%"
-            rotateAmplitude={10}
-            scaleOnHover={1.04}
-            overlayContent={<div><strong>FDE 项目纪录</strong><small>把一次次探索，剪成可以分享的现场。</small></div>}
-            displayOverlayContent
-          />
-        </article>
+    <section className="projects-section" id="projects" aria-labelledby="projects-title" data-story-scroll>
+      <div className="projects-composition">
+        <div className="projects-intro">
+          <h2 id="projects-title">
+            <TextType {...typingEffect} className="projects-headline" text="让想法，" initialDelay={150} showCursor={false} />
+            <TextType {...typingEffect} className="projects-headline projects-headline--offset" text="成为作品。" initialDelay={650} cursorCharacter="|" />
+          </h2>
+          <p className="projects-english"><ShinyText {...shineEffect} text="Ideas into Practice." /></p>
+          <p className="projects-description">我们用项目记录共同探索的过程：问题如何被理解，想法怎样被验证，方案又如何逐步完善。每一件作品，都是下一次讨论的起点。</p>
+        </div>
+        <div className="projects-showcase" aria-label="四个团队项目">
+          <CardSwap width="var(--project-card-width)" height="var(--project-card-height)"
+            cardDistance={38} verticalDistance={56} delay={5000} skewAmount={5} easing="linear"
+            pauseOnHover active={active && !isTraveling} paused={videoPlaying}
+            reducedMotion={reducedMotion} onActiveChange={changeCard}>
+            {projects.map((project, index) => {
+              const Content = project.href ? 'a' : 'div';
+              const linkProps = project.href ? { href: project.href, target: '_blank', rel: 'noreferrer' } : {};
+              return (
+                <Card key={project.title} className="project-deck-card" aria-label={project.title}>
+                  <div className="project-deck-card__content">
+                    <button type="button" className="project-deck-card__header" data-card-select={index}
+                      aria-label={`查看${project.title}`} aria-pressed={current === index}>
+                      <span className="project-deck-card__number">0{index + 1}</span>
+                      <span className="project-deck-card__title">{project.title}</span>
+                      <span className="project-deck-card__type">{project.type}</span>
+                    </button>
+                    <Content {...linkProps} data-card-body data-card-pause
+                      inert={active && current === index ? undefined : ''}
+                      className={`project-deck-card__media${project.video ? ' project-deck-card__media--video' : ''}${project.fit ? ` project-deck-card__media--${project.fit}` : ''}`}>
+                      {project.video
+                        ? <video ref={video} src={project.video} preload="metadata" controls playsInline
+                            aria-label="FDE 项目纪录视频" onPlay={() => setVideoPlaying(true)} onPause={() => setVideoPlaying(false)} onEnded={() => setVideoPlaying(false)} />
+                        : <img src={project.image} alt={project.alt} decoding="async" />}
+                    </Content>
+                    <Content {...linkProps} data-card-body data-card-pause
+                      inert={active && current === index ? undefined : ''}
+                      className="project-deck-card__footer"><p><ChapterText chapter="projects" enabled={current === index} effect="blur" text={project.description} /></p>{project.href && <span>打开项目 ↗</span>}</Content>
+                  </div>
+                </Card>
+              );
+            })}
+          </CardSwap>
+        </div>
       </div>
-      <div className="projects-footnote"><span>PROJECTS / TILTED CARD GALLERY</span><span>悬停卡片查看细节 · 点击前两张打开项目</span></div>
     </section>
   );
 }

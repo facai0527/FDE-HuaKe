@@ -1,0 +1,44 @@
+/* Inline elements retain native CJK punctuation rules, word wrapping and selection. */
+.editorial-text--blur { position: relative; }
+.editorial-text .editorial-text__unit,
+.editorial-text .editorial-text__code {
+  position: relative;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-decoration: inherit;
+}
+.editorial-text .editorial-text__original,
+.editorial-text .editorial-text__cipher {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+.editorial-text .editorial-text__cipher {
+  position: absolute;
+  inset: 0;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+  opacity: .7;
+}
+.editorial-text .editorial-text__cipher:empty { display: none; }
+.editorial-text [data-encoded='true'] > .editorial-text__original { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial-text,
+  .editorial-text .editorial-text__unit {
+    filter: none !important;
+    opacity: 1 !important;
+    top: 0 !important;
+  }
+  .editorial-text [data-encoded='true'] > .editorial-text__original { opacity: 1; }
+  .editorial-text .editorial-text__cipher { visibility: hidden; }
+}

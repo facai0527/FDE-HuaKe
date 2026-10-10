@@ -109,7 +109,9 @@ export default function TearTicket({
   recenter = true,
   disabled = false,
   ariaLabel = 'Tear off the stub',
-  className = ''
+  className = '',
+  loading = 'eager',
+  decoding = 'async'
 }) {
   const reduce = useReducedMotion();
   const controlled = torn !== undefined;
@@ -485,18 +487,52 @@ export default function TearTicket({
   };
 
   useEffect(() => {
+    let inReach = false;
+    const resetTilt = () => {
+      inReach = false;
+      tiltX.set(0);
+      tiltY.set(0);
+    };
+    resetTilt();
     if (!tilt || reduce || disabled) return undefined;
+    const reach = Math.max(0, Number(tiltReach) || 0);
     const move = e => {
       const el = rootRef.current;
-      if (!el || e.pointerType === 'touch' || sim.current.id !== null) return;
+      if (!el || e.pointerType === 'touch' || sim.current.id !== null) {
+        if (inReach) resetTilt();
+        return;
+      }
       const r = el.getBoundingClientRect();
-      const nx = clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2 + tiltReach), -1, 1);
-      const ny = clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2 + tiltReach), -1, 1);
-      tiltY.set(nx * tiltMax);
-      tiltX.set(-ny * tiltMax);
+      const dx = Math.max(r.left - e.clientX, 0, e.clientX - r.right);
+      const dy = Math.max(r.top - e.clientY, 0, e.clientY - r.bottom);
+      const distance = Math.hypot(dx, dy);
+      if (!r.width || !r.height || distance > reach) {
+        if (inReach) resetTilt();
+        return;
+      }
+      // Reach extends beyond the card's edges; nearby cards stay still, and
+      // the response fades smoothly to zero at the outer boundary.
+      const outside = reach > 0 ? distance / reach : 0;
+      const influence = 1 - outside * outside * (3 - 2 * outside);
+      const nx = clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2), -1, 1);
+      const ny = clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2), -1, 1);
+      inReach = true;
+      tiltY.set(nx * tiltMax * influence);
+      tiltX.set(-ny * tiltMax * influence);
     };
-    window.addEventListener('pointermove', move);
-    return () => window.removeEventListener('pointermove', move);
+    const leave = e => { if (!e.relatedTarget) resetTilt(); };
+    const visibility = () => { if (document.hidden) resetTilt(); };
+    window.addEventListener('pointermove', move, { passive: true });
+    window.addEventListener('pointerout', leave);
+    window.addEventListener('blur', resetTilt);
+    document.addEventListener('visibilitychange', visibility);
+    return () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerout', leave);
+      window.removeEventListener('blur', resetTilt);
+      document.removeEventListener('visibilitychange', visibility);
+      resetTilt();
+    };
   }, [tilt, reduce, disabled, tiltMax, tiltReach, tiltX, tiltY]);
 
   return (
@@ -543,6 +579,8 @@ export default function TearTicket({
                     className="tear-ticket__image"
                     src={image}
                     alt={imageAlt}
+                    loading={loading}
+                    decoding={decoding}
                     draggable={false}
                     style={reduce ? undefined : { transform: art }}
                   />
@@ -598,7 +636,7 @@ export default function TearTicket({
         </motion.div>
       </div>
       <span className="tear-ticket__sr" role="status">
-        {used ? '票根已撕下，作品亮点已展开' : ''}
+        {used ? '票根已撕下' : ''}
       </span>
     </div>
   );

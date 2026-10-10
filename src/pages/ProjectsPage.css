@@ -1,13 +1,57 @@
-.tilted-project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 28px; }
-.tilted-project { display: block; min-width: 0; height: clamp(280px, 28vw, 430px); padding-top: 28px; position: relative; }
-.tilted-project__tag { position: absolute; inset: 0 0 auto; display: flex; justify-content: space-between; color: #64748b; font: 600 10px 'Space Grotesk', 'Noto Sans SC', sans-serif; letter-spacing: .14em; }
-.tilted-project .tilted-card-overlay strong { display: block; font: 500 clamp(1.3rem, 2vw, 2rem)/1.3 'Noto Serif SC', serif; }
-.tilted-project .tilted-card-overlay small { display: block; margin-top: 8px; font-size: 12px; line-height: 1.7; opacity: .8; }
-.projects-footnote { display: flex; justify-content: space-between; gap: 20px; margin-top: 32px; color: #8290a2; font-size: 10px; letter-spacing: .08em; }
-
+.story-experience .site-shell > .projects-section { color: #e8f0f5; background: transparent; }
+.projects-section { --project-card-width: min(55vw, 1200px); --project-card-height: min(80dvh, 900px); display: grid; grid-template-rows: minmax(0, 1fr); }
+.projects-composition { min-height: 0; display: grid; grid-template-columns: .9fr 1.3fr; gap: clamp(30px, 4vw, 80px); align-items: center; }
+.projects-intro { position: relative; z-index: 2; max-width: 730px; }
+.projects-intro h2 { display: flex; flex-direction: column; align-items: flex-start; margin: 0; color: #fff; font: 600 clamp(44px, min(5.2vw, 10.4dvh), 108px)/1.18 'Noto Sans SC', sans-serif; letter-spacing: -.045em; text-shadow: 0 2px 18px #060b10; }
+.projects-headline { white-space: nowrap; }
+.projects-headline--offset { margin-left: 1.9em; }
+.projects-english { margin: clamp(16px, 2.4dvh, 26px) 0 0; color: #afc7de; font: 400 clamp(20px, 1.8vw, 34px)/1.4 'Space Grotesk', sans-serif; }
+.projects-description { max-width: 560px; margin: clamp(28px, 4.2dvh, 46px) 0 0; color: #bdccdc; font-size: clamp(14px, 1.1vw, 21px); line-height: 1.95; text-shadow: 0 1px 10px #060b10; }
+.projects-english, .projects-description { color: #fff; text-shadow: none; }
+.project-deck-card a:focus-visible, .project-deck-card__header:focus-visible { outline: 2px solid #3f7bff; outline-offset: -3px; }
+.projects-showcase { position: relative; height: 100%; min-height: 0; }
+.projects-showcase .card-swap-container { position: absolute; left: 55%; top: 67%; right: auto; bottom: auto; transform: translate(-50%, -50%); transform-origin: center; }
+.projects-showcase .project-deck-card { overflow: hidden; border: 1px solid #c9cbd0; border-radius: 12px; background: #fff; color: #1b1c20; box-shadow: 0 12px 26px -16px #17233833; }
+.project-deck-card__content { display: grid; height: 100%; grid-template-rows: 44px minmax(0, 1fr) 61px; }
+.project-deck-card__header { display: flex; width: 100%; align-items: center; gap: 12px; padding: 0 18px; border: 0; border-bottom: 1px solid #dedfe3; background: #fafafa; color: #1b1c20; font: inherit; text-align: left; cursor: pointer; }
+.project-deck-card__header:hover { background: #f0f2f5; }
+.project-deck-card__number { color: #9297a0; font: 500 10px 'Space Grotesk', sans-serif; }
+.project-deck-card__title { margin: 0; font-size: 13px; font-weight: 500; white-space: nowrap; }
+.project-deck-card__type { margin-left: auto; color: #858a94; font: 500 8px 'Space Grotesk', sans-serif; letter-spacing: .08em; }
+.project-deck-card__media { overflow: hidden; min-height: 0; background: #edf0f3; }
+.project-deck-card__media img, .project-deck-card__media video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
+.project-deck-card__media--contain { display: grid; place-items: center; background: #261a13; }
+.project-deck-card__media--contain img { object-fit: contain; object-position: center; }
+.project-deck-card__media--video { background: #080c12; }
+.project-deck-card__media video { object-fit: contain; }
+.project-deck-card__footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 12px 18px; border-top: 1px solid #e8e9ec; }
+.project-deck-card__footer p { margin: 0; color: #696e78; font-size: 10px; line-height: 1.7; }
+.project-deck-card__footer > span { flex: 0 0 auto; font-size: 10px; }
+@media (min-width: 768px) {
+  .story-experience .site-shell > section.projects-section[data-story-scroll] { overflow: hidden; }
+  .projects-showcase .card-swap-container { left: calc(55% + 4.7vw); top: calc(67% + 9.7dvh); }
+}
 @media (max-width: 767px) {
-  .projects-section .section-heading h2 { font-size: clamp(2rem, 9vw, 3.5rem); }
-  .tilted-project-grid { grid-template-columns: 1fr; gap: 28px; }
-  .tilted-project { height: 300px; }
-  .projects-footnote { flex-direction: column; gap: 8px; }
+  .projects-section { --project-card-width: min(75vw, 450px); --project-card-height: clamp(230px, 35dvh, 330px); grid-template-rows: minmax(550px, 1fr); }
+  .projects-composition { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 10px; }
+  .projects-intro { max-width: none; }
+  .projects-intro h2 { font-size: clamp(25px, 7vw, 38px); }
+  .projects-english { margin-top: 8px; font-size: 13px; }
+  .projects-description { margin-top: 12px; max-width: 460px; font-size: 10px; line-height: 1.7; }
+  .projects-showcase .card-swap-container { left: 43%; top: 64%; }
+  .project-deck-card__content { grid-template-rows: 36px minmax(0, 1fr) 50px; }
+  .project-deck-card__header { gap: 8px; padding: 0 12px; }
+  .project-deck-card__title { font-size: 11px; }
+  .project-deck-card__type { display: none; }
+  .project-deck-card__header > span:last-child:not(.project-deck-card__type) { margin-left: auto; }
+  .project-deck-card__footer { padding: 8px 12px; gap: 8px; }
+  .project-deck-card__footer p { font-size: 8px; line-height: 1.5; }
+  .project-deck-card__footer > span { font-size: 8px; }
+}
+@media (max-height: 600px) and (min-width: 768px) {
+  .projects-section { --project-card-height: 56dvh; --project-card-width: min(42vw, 560px); gap: 12px; }
+  .projects-intro h2 { font-size: 30px; }
+  .projects-description { margin-top: 14px; font-size: 10px; }
+  .projects-showcase .card-swap-container { top: calc(65% + 15dvh); }
+  .project-deck-card__content { grid-template-rows: 36px minmax(0, 1fr) 45px; }
 }

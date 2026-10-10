@@ -67,7 +67,7 @@
   content: '';
   position: absolute;
   inset: 8px;
-  border: 2px solid #2563eb;
+  border: 2px solid var(--accent);
   border-radius: 8px;
   pointer-events: none;
 }

@@ -1,0 +1,5 @@
+.pixel-swap { position: relative; width: 100%; overflow: hidden; isolation: isolate; outline: none; }
+.pixel-swap__layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pixel-swap__layer[data-visible='false'] { visibility: hidden; }
+.pixel-swap__mask { position: absolute; width: 0; height: 0; pointer-events: none; }
+.pixel-swap__pixel { transform-box: fill-box; transform-origin: center; transform: scale(0); }

@@ -1,9 +1,0 @@
-{
-  "reports": [
-    "Desktop: five real images and URLs, Enter/Space tear, focus transfer, restore, direct details toggle, real mouse drag and wheel scroll.",
-    "Mobile: actual touch drag tears and reveals highlights; reset works without changing pages.",
-    "Responsive: no horizontal overflow at 320, 768, 1440 and 2560 px; all tickets remain usable.",
-    "Reduced motion: instant keyboard activation and reset work."
-  ],
-  "errors": []
-}

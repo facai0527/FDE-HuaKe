@@ -57,6 +57,11 @@ const TechText = ({
   draggable = true,
   sweep = true,
   speed = 1,
+  align = 'center',
+  multiline = false,
+  active = true,
+  paused = false,
+  reducedMotion = false,
   className = '',
   style
 }) => {
@@ -86,20 +91,35 @@ const TechText = ({
       labels,
       draggable,
       sweep,
-      speed
+      speed,
+      align,
+      multiline,
+      active,
+      paused,
+      reducedMotion
     };
-    wakeRef.current();
-  });
+    wakeRef.current(true);
+  }, [text, fontFamily, fontWeight, fontSize, letterSpacing, color, accentColor, reach,
+    softness, dashLength, dashGap, strokeWidth, lineStyle, reveal, specks, selection,
+    labels, draggable, sweep, speed, align, multiline, active, paused, reducedMotion, className, style]);
 
   useEffect(() => {
     const container = containerRef.current;
     const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
     const scratch = document.createElement('canvas');
-    const scratchCtx = scratch.getContext('2d');
+    let ctx;
+    let scratchCtx;
+    try {
+      ctx = canvas?.getContext('2d');
+      scratchCtx = scratch.getContext('2d');
+    } catch {
+      // The semantic text remains visible when canvas is unavailable.
+      return undefined;
+    }
     if (!container || !canvas || !ctx || !scratchCtx) return undefined;
 
-    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const motionPreference = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    let systemReducedMotion = Boolean(motionPreference?.matches);
     let width = 1;
     let height = 1;
     let dpr = 1;
@@ -108,6 +128,8 @@ const TechText = ({
     let visible = true;
     let alive = true;
     let layoutKey = '';
+    let inheritedFamily = '';
+    let paragraphFont = null;
     let requestedFont = '';
     let word = null;
     let glyphs = [];
@@ -116,22 +138,48 @@ const TechText = ({
     let pulse = 0;
     let placed = false;
     let dragging = -1;
+    let capturedPointer = null;
     const pointer = { x: 0, y: 0, inside: false };
     const grab = { x: 0, y: 0 };
     const lens = { x: 0, y: 0 };
     const frame = { x1: 0, y1: 0, x2: 0, y2: 0, alpha: 0, index: -1 };
 
+    const canRender = () => {
+      const s = settingsRef.current;
+      return alive && visible && !document.hidden && s?.active && !s.paused;
+    };
+    const shouldReduceMotion = () => systemReducedMotion || settingsRef.current?.reducedMotion;
+    const releaseDrag = () => {
+      dragging = -1;
+      if (capturedPointer !== null && container.hasPointerCapture?.(capturedPointer)) {
+        container.releasePointerCapture(capturedPointer);
+      }
+      capturedPointer = null;
+      container.style.cursor = '';
+    };
+    const suspend = () => {
+      cancelAnimationFrame(raf);
+      raf = 0;
+      releaseDrag();
+      pointer.inside = false;
+      container.dataset.animating = 'false';
+    };
+
     const refreshFonts = () => {
+      inheritedFamily = '';
+      paragraphFont = null;
       layoutKey = '';
       wakeRef.current();
     };
 
-    const family = s => s.fontFamily || getComputedStyle(container).fontFamily || 'sans-serif';
+    // Font styles change at prop/font/size boundaries, not on every scan frame.
+    const family = s => s.fontFamily || inheritedFamily ||
+      (inheritedFamily = getComputedStyle(container).fontFamily || 'sans-serif');
     const fontFor = (s, size) => `${s.fontWeight} ${size}px ${family(s)}`;
 
     const setFont = (target, s, size) => {
       target.font = fontFor(s, size);
-      if ('letterSpacing' in target) target.letterSpacing = `${s.letterSpacing * size}px`;
+      if ('letterSpacing' in target) target.letterSpacing = `${s.multiline ? paragraphFont.spacing : s.letterSpacing * size}px`;
       target.textAlign = 'left';
       target.textBaseline = 'alphabetic';
     };
@@ -145,9 +193,14 @@ const TechText = ({
       const image = document.createElement('canvas');
       image.width = Math.max(1, Math.ceil(w * dpr));
       image.height = Math.max(1, Math.ceil(h * dpr));
-      const c = image.getContext('2d');
+      // Small CPU-backed glyph caches avoid lost strokes in Chrome's accelerated
+      // offscreen text surfaces after responsive resizes and chapter switches.
+      const c = image.getContext('2d', { willReadFrequently: true });
       if (!c) return { image, left, top };
-      c.setTransform(dpr, 0, 0, dpr, -left * dpr, -top * dpr);
+      // Keep raster bounds in sprite-local coordinates as the font resizes.
+      c.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const localX = glyph.x - left;
+      const localBaseline = view.baseline - top;
       setFont(c, s, view.size);
       if (stroke) {
         c.lineJoin = 'round';
@@ -155,20 +208,24 @@ const TechText = ({
         c.lineCap = 'butt';
         c.strokeStyle = s.color;
         if (s.lineStyle !== 'solid') c.setLineDash([Math.max(1, s.dashLength), Math.max(1, s.dashGap)]);
-        c.strokeText(glyph.char, glyph.x, view.baseline);
+        c.strokeText(glyph.char, localX, localBaseline);
         c.setLineDash([]);
         c.globalCompositeOperation = 'destination-out';
         c.fillStyle = '#000000';
-        c.fillText(glyph.char, glyph.x, view.baseline);
+        c.fillText(glyph.char, localX, localBaseline);
         c.globalCompositeOperation = 'source-over';
       } else {
         c.fillStyle = s.color;
-        c.fillText(glyph.char, glyph.x, view.baseline);
+        c.fillText(glyph.char, localX, localBaseline);
       }
       return { image, left, top };
     };
 
     const ensureLayout = s => {
+      if (s.multiline && !paragraphFont) {
+        const css = getComputedStyle(container);
+        paragraphFont = { size: parseFloat(css.fontSize), spacing: parseFloat(css.letterSpacing) || 0 };
+      }
       const key = [
         s.text,
         family(s),
@@ -180,6 +237,10 @@ const TechText = ({
         s.dashGap,
         s.strokeWidth,
         s.lineStyle,
+        s.align,
+        s.multiline,
+        paragraphFont?.size,
+        paragraphFont?.spacing,
         width,
         height,
         dpr
@@ -193,11 +254,56 @@ const TechText = ({
       }
 
       const probe = scratchCtx;
+      if (s.multiline) {
+        // Use the semantic paragraph's layout for Chinese punctuation and wrapping.
+        // Measure only on layout/font changes; animation reuses cached glyph sprites.
+        const readable = container.querySelector('.tech-text-readable');
+        const node = readable.firstChild;
+        const origin = container.getBoundingClientRect();
+        const size = paragraphFont.size;
+        const previous = glyphs;
+        const next = { size, left: Infinity, right: 0, top: Infinity, bottom: 0 };
+        const segments = typeof Intl.Segmenter === 'function'
+          ? [...new Intl.Segmenter('zh', { granularity: 'grapheme' }).segment(s.text)].map(item => item.segment)
+          : Array.from(s.text);
+        const range = document.createRange();
+        let offset = 0;
+        glyphs = [];
+        setFont(probe, s, size);
+        for (const char of segments) {
+          range.setStart(node, offset);
+          offset += char.length;
+          range.setEnd(node, offset);
+          if (!char.trim()) continue;
+          const rect = range.getBoundingClientRect();
+          const own = probe.measureText(char);
+          const x = rect.left - origin.left;
+          const baseline = rect.top - origin.top + (own.fontBoundingBoxAscent ?? size * 0.8);
+          const base = { char, x, box: {
+            x1: x - own.actualBoundingBoxLeft, x2: x + own.actualBoundingBoxRight,
+            y1: baseline - own.actualBoundingBoxAscent, y2: baseline + own.actualBoundingBoxDescent,
+          } };
+          const kept = previous[glyphs.length];
+          glyphs.push({ ...base, offset: kept?.char === char ? kept.offset : { x: 0, y: 0 },
+            velocity: { x: 0, y: 0 }, outline: 0, index: glyphs.length,
+            fill: sprite(s, { size, baseline }, base, false),
+            dashes: sprite(s, { size, baseline }, base, true) });
+          next.left = Math.min(next.left, base.box.x1);
+          next.right = Math.max(next.right, base.box.x2);
+          next.top = Math.min(next.top, base.box.y1);
+          next.bottom = Math.max(next.bottom, base.box.y2);
+        }
+        word = glyphs.length ? next : { size, left: 0, right: 0, top: 0, bottom: 0 };
+        dragging = -1;
+        frame.index = -1;
+        return word;
+      }
       setFont(probe, s, s.fontSize);
       let m = probe.measureText(s.text);
       const fit = Math.min(
         1,
-        (width * 0.9) / Math.max(m.actualBoundingBoxLeft + m.actualBoundingBoxRight, 1),
+        Math.max(1, s.align === 'left' ? width - 24 : width * 0.9) /
+          Math.max(m.actualBoundingBoxLeft + m.actualBoundingBoxRight, 1),
         (height * 0.66) / Math.max(m.actualBoundingBoxAscent + m.actualBoundingBoxDescent, 1)
       );
       const size = s.fontSize * fit;
@@ -205,7 +311,7 @@ const TechText = ({
       m = probe.measureText(s.text);
       const inkWidth = m.actualBoundingBoxLeft + m.actualBoundingBoxRight;
       const inkHeight = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
-      const x = (width - inkWidth) / 2 + m.actualBoundingBoxLeft;
+      const x = (s.align === 'left' ? 12 : (width - inkWidth) / 2) + m.actualBoundingBoxLeft;
       const baseline = (height - inkHeight) / 2 + m.actualBoundingBoxAscent;
       const next = {
         size,
@@ -259,7 +365,11 @@ const TechText = ({
       glyphs.forEach((glyph, i) => {
         const x1 = glyph.box.x1 + glyph.offset.x;
         const x2 = glyph.box.x2 + glyph.offset.x;
-        const d = x < x1 ? x1 - x : x > x2 ? x - x2 : 0;
+        const y1 = glyph.box.y1 + glyph.offset.y;
+        const y2 = glyph.box.y2 + glyph.offset.y;
+        const dx = x < x1 ? x1 - x : x > x2 ? x - x2 : 0;
+        const dy = y < y1 ? y1 - y : y > y2 ? y - y2 : 0;
+        const d = Math.hypot(dx, dy);
         if (d < bestDistance) {
           bestDistance = d;
           best = i;
@@ -455,12 +565,38 @@ const TechText = ({
     const tick = now => {
       raf = 0;
       const s = settingsRef.current;
-      if (!s) return;
+      if (!s || !canRender()) return;
+      if (s.multiline && now - last < 1000 / 30) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
       const dt = Math.min(0.05, Math.max(0.001, (now - last) / 1000));
       last = now;
       const view = ensureLayout(s);
 
-      const sweeping = s.sweep && !reducedMotion && !pointer.inside && dragging < 0;
+      // Reduced motion keeps the complete text visible without a scan or spring loop.
+      if (shouldReduceMotion()) {
+        releaseDrag();
+        presence = 0;
+        placed = false;
+        frame.alpha = 0;
+        frame.index = -1;
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.globalAlpha = 1;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const glyph of glyphs) {
+          glyph.offset.x = glyph.offset.y = 0;
+          glyph.velocity.x = glyph.velocity.y = 0;
+          glyph.outline = 0;
+          blit(ctx, glyph.fill, 0, 0, 0, 0);
+        }
+        container.dataset.canvasReady = 'true';
+        container.dataset.animating = 'false';
+        return;
+      }
+
+      const sweeping = s.sweep && !pointer.inside && dragging < 0;
       if (sweeping) clock += dt * s.speed;
       pulse += dt;
       let targetX = pointer.x;
@@ -468,6 +604,11 @@ const TechText = ({
       if (sweeping) {
         targetX = view.left + (view.right - view.left) * (0.5 - 0.5 * Math.cos(clock * 0.45));
         targetY = view.top + (view.bottom - view.top) * (0.45 + 0.1 * Math.sin(clock * 0.8));
+        if (s.multiline && glyphs.length) {
+          const glyph = glyphs[Math.floor(clock * 8) % glyphs.length];
+          targetX = (glyph.box.x1 + glyph.box.x2) / 2;
+          targetY = (glyph.box.y1 + glyph.box.y2) / 2;
+        }
       }
       const active = pointer.inside || sweeping || dragging >= 0;
       if (active && !placed) {
@@ -536,7 +677,7 @@ const TechText = ({
         else glyph.outline = target;
       });
 
-      if (s.draggable) container.style.cursor = dragging >= 0 ? 'grabbing' : focus >= 0 && pointer.inside ? 'grab' : '';
+      container.style.cursor = s.draggable ? (dragging >= 0 ? 'grabbing' : focus >= 0 && pointer.inside ? 'grab' : '') : '';
 
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.globalCompositeOperation = 'source-over';
@@ -562,27 +703,43 @@ const TechText = ({
       }
       if (presence > 0.001) drawReveal(s);
       drawFrame(s);
+      container.dataset.canvasReady = 'true';
 
       const settling =
         moving ||
         Math.abs(presence - (s.reveal === 'area' && active && dragging < 0 ? 1 : 0)) > 0.002 ||
         (frame.alpha > 0.01 && frame.alpha < 0.99);
-      if ((active || settling) && visible && alive) raf = requestAnimationFrame(tick);
+      const animating = (active || settling) && canRender();
+      container.dataset.animating = String(animating);
+      if (animating) raf = requestAnimationFrame(tick);
     };
 
-    const wake = () => {
-      if (raf || !visible || !alive) return;
+    const wake = (refreshInheritedFont = false) => {
+      if (refreshInheritedFont) { inheritedFamily = ''; paragraphFont = null; }
+      if (!canRender()) {
+        suspend();
+        return;
+      }
+      if (raf) return;
       last = performance.now();
       raf = requestAnimationFrame(tick);
     };
     wakeRef.current = wake;
 
     const resize = () => {
-      width = Math.max(1, container.clientWidth);
-      height = Math.max(1, container.clientHeight);
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const nextWidth = Math.max(1, container.clientWidth);
+      const nextHeight = Math.max(1, container.clientHeight);
+      const nextDpr = Math.min(window.devicePixelRatio || 1, 2);
+      if (width === nextWidth && height === nextHeight && dpr === nextDpr &&
+        canvas.width === Math.round(nextWidth * nextDpr) && canvas.height === Math.round(nextHeight * nextDpr)) return;
+      width = nextWidth;
+      height = nextHeight;
+      dpr = nextDpr;
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
+      delete container.dataset.canvasReady;
+      inheritedFamily = '';
+      paragraphFont = null;
       layoutKey = '';
       wake();
     };
@@ -593,16 +750,19 @@ const TechText = ({
       pointer.y = e.clientY - rect.top;
     };
     const onMove = e => {
+      if (!canRender() || shouldReduceMotion()) return;
       locate(e);
       pointer.inside = true;
       wake();
     };
     const onLeave = () => {
+      if (!canRender() || shouldReduceMotion()) return;
       if (dragging >= 0) return;
       pointer.inside = false;
       wake();
     };
     const onDown = e => {
+      if (!canRender() || shouldReduceMotion()) return;
       locate(e);
       pointer.inside = true;
       const s = settingsRef.current;
@@ -613,20 +773,25 @@ const TechText = ({
           grab.x = pointer.x - glyphs[index].offset.x;
           grab.y = pointer.y - glyphs[index].offset.y;
           container.setPointerCapture?.(e.pointerId);
+          capturedPointer = e.pointerId;
         }
       }
       wake();
     };
     const onUp = e => {
       if (dragging >= 0) {
-        dragging = -1;
-        container.releasePointerCapture?.(e.pointerId);
+        releaseDrag();
         const rect = container.getBoundingClientRect();
         pointer.inside =
           e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
       }
       wake();
     };
+    const onMotionPreference = event => {
+      systemReducedMotion = event.matches;
+      wake();
+    };
+    const onVisibility = () => wake();
 
     container.addEventListener('pointermove', onMove, { passive: true });
     container.addEventListener('pointerenter', onMove, { passive: true });
@@ -634,6 +799,8 @@ const TechText = ({
     container.addEventListener('pointerup', onUp, { passive: true });
     container.addEventListener('pointercancel', onUp, { passive: true });
     container.addEventListener('pointerleave', onLeave, { passive: true });
+    document.addEventListener('visibilitychange', onVisibility);
+    motionPreference?.addEventListener?.('change', onMotionPreference);
 
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
@@ -648,7 +815,8 @@ const TechText = ({
 
     return () => {
       alive = false;
-      cancelAnimationFrame(raf);
+      suspend();
+      delete container.dataset.canvasReady;
       wakeRef.current = () => {};
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
@@ -658,13 +826,22 @@ const TechText = ({
       container.removeEventListener('pointerup', onUp);
       container.removeEventListener('pointercancel', onUp);
       container.removeEventListener('pointerleave', onLeave);
+      document.removeEventListener('visibilitychange', onVisibility);
+      motionPreference?.removeEventListener?.('change', onMotionPreference);
     };
   }, []);
 
   return (
-    <div ref={containerRef} className={`tech-text ${className}`.trim()} style={style} role="img" aria-label={text}>
-      <canvas ref={canvasRef} className="tech-text-canvas" />
-    </div>
+    <span
+      ref={containerRef}
+      className={`tech-text ${className}`.trim()}
+      data-align={align}
+      data-multiline={multiline || undefined}
+      style={{ color, fontFamily: fontFamily || undefined, fontWeight, '--tech-text-font-size': `${fontSize}px`, ...style }}
+    >
+      <span className="tech-text-readable">{text}</span>
+      <canvas ref={canvasRef} className="tech-text-canvas" aria-hidden="true" />
+    </span>
   );
 };
 

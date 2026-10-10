@@ -1,0 +1,37 @@
+.smooth-metal-logo {
+  --metal-dark: #485c73;
+  --metal-low: #738a9f;
+  --metal-middle: #b8c9d9;
+  --metal-high: #ffffff;
+  --metal-type-light: #e5eef5;
+  --metal-type-mid: #a8bbcc;
+  --metal-depth: #192638;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.smooth-metal-logo__reflection {
+  animation: wordmark-metal-flow 8.5s cubic-bezier(.45, 0, .55, 1) infinite alternate;
+}
+
+.smooth-metal-logo[data-paused='true'] .smooth-metal-logo__reflection { animation-play-state: paused; }
+
+.site-header[data-theme='light'] .smooth-metal-logo {
+  --metal-dark: #142535;
+  --metal-low: #405970;
+  --metal-middle: #879cae;
+  --metal-high: #e3edf5;
+  --metal-type-light: #526d82;
+  --metal-type-mid: #253c52;
+  --metal-depth: #5a6e80;
+}
+
+@keyframes wordmark-metal-flow {
+  from { transform: translate(-10px, -1px); }
+  to { transform: translate(98px, 2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smooth-metal-logo__reflection { animation: none; }
+}

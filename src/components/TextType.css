@@ -1,0 +1,7 @@
+.text-type { position: relative; display: inline-grid; white-space: pre-wrap; }
+.text-type__sizer { display: grid; visibility: hidden; pointer-events: none; }
+.text-type__sizer > span { grid-area: 1 / 1; }
+.text-type__visual { position: absolute; inset: 0; }
+.text-type__cursor, .text-type__cursor-space { display: inline-block; margin-left: .08em; font-weight: 400; }
+.text-type__cursor--hidden { visibility: hidden; }
+.text-type__accessible { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

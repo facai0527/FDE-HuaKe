@@ -31,6 +31,7 @@ const AccordionGallery = ({
   stagger = 0.06,
   trigger = 'hover',
   showLabels = true,
+  showOverlay = true,
   grayscale = true,
   className = ''
 }) => {
@@ -228,7 +229,7 @@ const AccordionGallery = ({
               <span className="ag-panel__media" ref={el => (mediaRefs.current[i] = el)}>
                 <img src={item.image} alt={item.alt || item.label || ''} draggable="false" />
               </span>
-              <span className="ag-panel__overlay" aria-hidden="true" />
+              {showOverlay && <span className="ag-panel__overlay" aria-hidden="true" />}
             </span>
             {showLabels && (
               <span className="ag-panel__label" aria-hidden="true">

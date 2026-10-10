@@ -1,0 +1,547 @@
+html.student-portfolio-route,
+body.student-portfolio-route,
+html.student-portfolio-route #root {
+  min-height: 100%;
+  height: auto;
+  overflow-x: hidden;
+}
+html.student-portfolio-route,
+body.student-portfolio-route {
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+html.student-portfolio-route #root {
+  overflow-y: visible;
+}
+
+.student-portfolio-page {
+  --kraft: #c7a779;
+  --ink: #2f261e;
+  --paper: #f8f3e8;
+  min-height: 100dvh;
+  height: 100dvh;
+  max-height: 100dvh;
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+  padding: clamp(18px, 3vw, 46px) 10px 72px;
+  color: var(--ink);
+  background-color: #b28150;
+  background-image:
+    linear-gradient(90deg, #ffffff0b 1px, transparent 1px),
+    linear-gradient(0deg, #ffffff0b 1px, transparent 1px),
+    linear-gradient(90deg, transparent 0 47%, #68452319 49%, #f8e0b01c 53%, transparent 55%),
+    linear-gradient(0deg, transparent 0 47%, #68452319 49%, #f8e0b01c 53%, transparent 55%),
+    radial-gradient(circle at 18% 12%, #e8c58e55, transparent 35%),
+    radial-gradient(circle at 84% 82%, #70451f28, transparent 42%),
+    repeating-linear-gradient(125deg, #a9764814 0 2px, transparent 2px 9px);
+  background-size: 52px 52px, 52px 52px, 116px 116px, 116px 116px, auto, auto, 9px 9px;
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.student-portfolio-page::before,
+.student-portfolio-page::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: '';
+}
+.student-portfolio-page::before {
+  background:
+    repeating-linear-gradient(0deg, #fff6df0a 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, #6c411e0d 0 1px, transparent 1px 7px);
+  opacity: .8;
+}
+.student-portfolio-page::after {
+  background: radial-gradient(ellipse at center, transparent 45%, #5a361e2e 100%);
+}
+
+.student-portfolio-paper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: clamp(104px, 9vw, 164px) clamp(42px, 4.8vw, 76px) 78px;
+  isolation: isolate;
+}
+.student-portfolio-paper::before,
+.student-portfolio-paper::after {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  content: '';
+  clip-path: polygon(
+    2.8% 1.3%, 7% 1.8%, 12% 1.1%, 17% 1.9%, 22% 1.2%, 28% 1.7%, 34% 1.1%,
+    40% 1.8%, 47% 1.1%, 53% 1.9%, 59% 1.2%, 65% 1.7%, 71% 1.1%, 78% 1.9%,
+    84% 1.2%, 91% 1.7%, 97.2% 1.1%,
+    98.2% 7%, 97.5% 13%, 98.3% 19%, 97.5% 26%, 98.1% 33%, 97.4% 40%,
+    98.2% 47%, 97.5% 54%, 98.2% 61%, 97.4% 68%, 98% 75%, 97.3% 82%, 98.1% 89%, 97.4% 96%,
+    92% 98.6%, 86% 97.9%, 80% 98.7%, 74% 98%, 68% 98.8%, 62% 98%, 56% 98.7%,
+    50% 98%, 44% 98.8%, 38% 98%, 32% 98.7%, 26% 98%, 20% 98.8%, 14% 98%, 8% 98.7%, 2% 97.8%,
+    1.7% 91%, 2.4% 84%, 1.6% 77%, 2.4% 70%, 1.8% 63%, 2.5% 56%, 1.7% 49%,
+    2.4% 42%, 1.8% 35%, 2.5% 28%, 1.7% 21%, 2.4% 14%, 1.8% 7%
+  );
+}
+.student-portfolio-paper::before {
+  background:
+    radial-gradient(ellipse at 50% 0%, #fffdf8 0%, transparent 46%),
+    radial-gradient(ellipse at 12% 62%, #eadfc9 0%, transparent 34%),
+    radial-gradient(ellipse at 96% 86%, #dbc7a8 0%, transparent 30%),
+    var(--paper);
+  filter: drop-shadow(0 24px 34px #5b371f33);
+}
+.student-portfolio-paper::after {
+  z-index: -1;
+  background:
+    linear-gradient(#8a755c19 1px, transparent 1px),
+    linear-gradient(90deg, #8a755c19 1px, transparent 1px),
+    repeating-linear-gradient(103deg, #947b5d08 0 1px, transparent 1px 6px),
+    linear-gradient(135deg, #fffdf5bf, transparent 44%, #d9c8ab27);
+  background-size: 31px 31px, 31px 31px, 8px 8px, auto;
+  mix-blend-mode: multiply;
+}
+
+.student-portfolio-header {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto clamp(42px, 7vw, 86px);
+}
+
+.student-portfolio-header__topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.student-portfolio-header__topline p {
+  margin: 0;
+  color: #7c6245;
+  font: 600 11px/1.2 'Space Grotesk', 'Noto Sans SC', sans-serif;
+  letter-spacing: .2em;
+}
+.student-portfolio-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 15px 11px 18px;
+  border: 1px solid #352b24;
+  border-radius: 999px;
+  color: #fffaf0;
+  background: #342d27;
+  box-shadow: 0 8px 14px #4d35221f, inset 0 1px #ffffff2e;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .05em;
+  text-decoration: none;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.student-portfolio-back-button:hover {
+  background: #4a3c31;
+  box-shadow: 0 11px 20px #4d352231, inset 0 1px #ffffff3d;
+  transform: translateY(-2px);
+}
+.student-portfolio-back-button:focus-visible {
+  outline: 3px solid #a46135;
+  outline-offset: 4px;
+}
+.student-portfolio-back-button__arrow {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border-radius: 50%;
+  color: #352b24;
+  background: #f3dfbd;
+  font-size: 15px;
+  line-height: 1;
+}
+.student-portfolio-heading { max-width: 980px; }
+.student-portfolio-heading { margin: clamp(48px, 7vw, 96px) auto 0; text-align: center; }
+.student-portfolio-heading__eyebrow {
+  color: #946d49;
+  font: 500 12px/1.2 'Space Grotesk', 'Noto Sans SC', sans-serif;
+  letter-spacing: .16em;
+}
+.student-portfolio-heading h1 {
+  margin: 0;
+  margin-top: 17px;
+  color: #292118;
+  font: 500 clamp(48px, 6.8vw, 104px)/1.06 'Noto Serif SC', 'Songti SC', serif;
+  letter-spacing: -.05em;
+}
+.student-portfolio-heading h1 span,
+.student-portfolio-heading h1 em {
+  display: block;
+  font-style: normal;
+}
+.student-portfolio-heading h1 em { color: #6f452d; }
+.student-portfolio-heading p {
+  margin: 20px 0 0;
+  color: #705943;
+  font-size: clamp(13px, 1.25vw, 18px);
+  letter-spacing: .13em;
+}
+.student-portfolio-heading__rule {
+  width: min(100%, 420px);
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  border-top: 1px solid #9e82635c;
+}
+.student-portfolio-heading__note {
+  max-width: 520px;
+  margin: 16px auto 0;
+  color: #8b735c;
+  font-size: 12px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* Six tracks keep the fifth ticket centered below the first three, like a sheet of stamps. */
+.student-portfolio-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(56px, 5.4vw, 94px) clamp(92px, 6.5vw, 120px);
+  max-width: 1320px;
+  margin: 0 auto;
+}
+.portfolio-stamp {
+  grid-column: span 2;
+  min-width: 0;
+  width: 125%;
+  margin-left: -12.5%;
+  content-visibility: auto;
+  contain: layout paint;
+  contain-intrinsic-size: 340px 195px;
+  filter: drop-shadow(0 14px 12px #452d1d2b);
+}
+.portfolio-stamp:nth-child(4) { grid-column: 2 / span 2; }
+.portfolio-stamp:nth-child(5) { grid-column: 4 / span 2; }
+.portfolio-stamp .tear-ticket { width: 100%; margin: 0 auto; }
+.portfolio-stamp .tear-ticket__art {
+  height: calc(var(--tt-body-h) - var(--tt-inset) * 2);
+}
+.portfolio-stamp .tear-ticket__image,
+.portfolio-stamp .tear-ticket[data-used] .tear-ticket__image {
+  object-position: left top;
+  filter: none;
+}
+.portfolio-stamp__image-link {
+  position: absolute;
+  inset: 8px;
+  border-radius: 8px;
+}
+.portfolio-stamp__image-link:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+.portfolio-stamp__stub {
+  display: grid;
+  height: 100%;
+  grid-template-rows: 24px minmax(0, 1fr) 24px 24px;
+  align-items: center;
+  justify-items: center;
+  gap: 10px;
+  padding: 28px 22px;
+  color: #223653;
+  text-align: center;
+}
+.portfolio-stamp__name {
+  color: #617087;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.portfolio-stamp__stub h2 {
+  margin: 0;
+  font: 500 clamp(22px, 2vw, 31px)/1.3 'Noto Serif SC', serif;
+  letter-spacing: -.04em;
+  overflow-wrap: anywhere;
+}
+.portfolio-stamp__tear-hint {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.portfolio-stamp__barcode {
+  display: block;
+  width: 112px;
+  max-width: 100%;
+  height: 24px;
+  opacity: .32;
+  background: repeating-linear-gradient(90deg, #223653 0 1px, transparent 1px 4px, #223653 4px 6px, transparent 6px 8px);
+}
+
+.student-portfolio-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1320px;
+  margin: clamp(70px, 10vw, 150px) auto 0;
+  padding-top: 20px;
+  border-top: 1px solid #694a2b70;
+  color: #654c31;
+  font-size: 11px;
+  letter-spacing: .12em;
+}
+
+.student-portfolio-dialog {
+  width: min(600px, calc(100vw - 36px));
+  max-height: calc(100dvh - 40px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid #dbe4ed;
+  border-radius: 22px;
+  background: #fafcfe;
+  color: #24394e;
+  box-shadow: 0 24px 80px #142c4d44;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+}
+.student-portfolio-dialog::backdrop {
+  background: #182b3d99;
+  backdrop-filter: blur(3px);
+}
+.student-portfolio-dialog__inner {
+  position: relative;
+  padding: clamp(28px, 5vw, 46px);
+}
+.student-portfolio-dialog__close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 2px solid #182332;
+  border-radius: 50%;
+  color: #536b82;
+  background: #eaf0f6;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.student-portfolio-dialog__close:focus-visible {
+  outline: 3px solid #3f7bff;
+  outline-offset: 3px;
+}
+.student-portfolio-dialog__kicker {
+  margin: 6px 0 28px;
+  color: #77879a;
+  font: 600 11px/1.2 'Space Grotesk', 'Noto Sans SC', sans-serif;
+  letter-spacing: .2em;
+}
+.student-portfolio-dialog h2 {
+  margin: 0 0 12px;
+  color: #2b4058;
+  font: 500 clamp(30px, 5vw, 42px)/1.2 'Noto Serif SC', serif;
+  letter-spacing: -.045em;
+}
+.student-portfolio-dialog h3 {
+  margin: 0 0 22px;
+  color: #2c4660;
+  font-size: 16px;
+  font-weight: 600;
+}
+.student-portfolio-dialog p,
+.student-portfolio-dialog li {
+  color: #617387;
+  font-size: 13px;
+  line-height: 1.9;
+}
+.student-portfolio-dialog ul {
+  margin: 24px 0;
+  padding-left: 18px;
+}
+.student-portfolio-dialog li + li { margin-top: 12px; }
+.student-portfolio-dialog a {
+  color: #3f7bff;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.portfolio-decor {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+.portfolio-decor--top-left {
+  top: 14px;
+  left: max(12px, calc(50% - 650px));
+  width: 248px;
+  height: 126px;
+  transform: scale(.72) rotate(-8deg);
+  transform-origin: left top;
+}
+.portfolio-label {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 8px;
+  color: #785c3d;
+  background: #e7d9bd;
+  border: 1px solid #9b805d;
+  box-shadow: 8px 13px 18px #4e311e2e, inset 0 0 0 5px #d5c3a4;
+  font: 600 9px/1.2 'Space Grotesk', 'Noto Sans SC', sans-serif;
+  letter-spacing: .18em;
+}
+.portfolio-label::before {
+  position: absolute;
+  inset: 6px;
+  border: 1px solid #a78961;
+  content: '';
+}
+.portfolio-label--top {
+  position: absolute;
+  inset: 16px 5px 8px;
+  clip-path: polygon(2% 8%, 11% 4%, 21% 8%, 34% 3%, 49% 7%, 64% 3%, 79% 7%, 96% 4%, 99% 16%, 96% 34%, 100% 52%, 96% 72%, 99% 91%, 85% 96%, 69% 92%, 53% 98%, 36% 93%, 21% 97%, 5% 91%, 2% 76%, 5% 59%, 1% 43%, 5% 24%);
+}
+.portfolio-label__rule {
+  display: block;
+  width: 42px;
+  height: 1px;
+  background: #a78961;
+}
+.portfolio-paperclip {
+  position: absolute;
+  top: -6px;
+  left: 35px;
+  width: 31px;
+  height: 95px;
+  border: 4px solid #987222;
+  border-bottom-color: transparent;
+  border-radius: 22px 22px 18px 18px;
+  transform: rotate(13deg);
+  filter: drop-shadow(2px 3px 1px #4c351a4f);
+}
+.portfolio-paperclip::before {
+  position: absolute;
+  top: 11px;
+  left: 8px;
+  width: 15px;
+  height: 70px;
+  border: 3px solid #c0a15a;
+  border-bottom-color: transparent;
+  border-radius: 14px;
+  content: '';
+}
+.portfolio-decor--top-right {
+  top: 8px;
+  right: max(18px, calc(50% - 635px));
+  width: 88px;
+  height: 102px;
+  transform: scale(.72) rotate(9deg);
+  transform-origin: right top;
+}
+.portfolio-binder-clip {
+  position: absolute;
+  inset: 14px 12px 0;
+  border: 3px solid #453a2b;
+  border-radius: 6px 6px 10px 10px;
+  background: linear-gradient(115deg, #a88b5d, #30291f 48%, #86704c 70%, #40372a);
+  box-shadow: 6px 11px 12px #49301d47, inset 0 2px #fff7d033;
+}
+.portfolio-binder-clip::before,
+.portfolio-binder-clip::after {
+  position: absolute;
+  top: -31px;
+  width: 25px;
+  height: 48px;
+  border: 4px solid #4d4030;
+  border-bottom: 0;
+  border-radius: 17px 17px 0 0;
+  content: '';
+}
+.portfolio-binder-clip::before { left: 7px; transform: rotate(-14deg); }
+.portfolio-binder-clip::after { right: 7px; transform: rotate(14deg); }
+.portfolio-binder-clip i {
+  position: absolute;
+  bottom: -23px;
+  width: 18px;
+  height: 29px;
+  border: 3px solid #4d4030;
+  border-top: 0;
+  border-radius: 0 0 7px 7px;
+  background: #806a48;
+}
+.portfolio-binder-clip i:first-child { left: 7px; transform: skewX(-8deg); }
+.portfolio-binder-clip i:last-child { right: 7px; transform: skewX(8deg); }
+.portfolio-decor--bottom-left {
+  bottom: 112px;
+  left: max(10px, calc(50% - 640px));
+  width: 260px;
+  height: 108px;
+  transform: rotate(13deg);
+}
+.portfolio-label--bottom {
+  position: absolute;
+  inset: 5px;
+  gap: 9px;
+  color: #8a553a;
+  background: #d5b982;
+  box-shadow: 7px 12px 18px #4e311e38, inset 0 0 0 5px #c4a36b;
+  clip-path: polygon(2% 10%, 15% 4%, 29% 8%, 44% 3%, 60% 7%, 75% 4%, 96% 10%, 98% 29%, 95% 49%, 100% 69%, 95% 91%, 80% 96%, 62% 92%, 47% 98%, 32% 93%, 16% 97%, 4% 90%, 1% 70%, 5% 52%, 1% 31%);
+}
+.portfolio-label--bottom strong {
+  font-size: 17px;
+  letter-spacing: .12em;
+}
+.portfolio-label--bottom span {
+  font-size: 9px;
+  letter-spacing: .16em;
+}
+@media (max-width: 980px) {
+  .student-portfolio-paper { max-width: 1440px; }
+  .student-portfolio-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(72px, 9vw, 100px);
+  }
+  .portfolio-stamp,
+  .portfolio-stamp:nth-child(4),
+  .portfolio-stamp:nth-child(5) { grid-column: auto; }
+  .portfolio-decor--top-left { top: 10px; left: 0; transform: scale(.62) rotate(-8deg); transform-origin: left top; }
+  .portfolio-decor--top-right { top: 8px; right: 8px; transform: scale(.62) rotate(9deg); transform-origin: right top; }
+  .portfolio-decor--bottom-left { left: -8px; transform: scale(.78) rotate(13deg); transform-origin: left bottom; }
+}
+@media (max-width: 600px) {
+  .student-portfolio-page {
+    padding: 12px 6px 34px;
+    background-size: 44px 44px, 44px 44px, 98px 98px, 98px 98px, auto, auto, 9px 9px;
+  }
+  .student-portfolio-paper { padding: 68px 22px 44px; }
+  .student-portfolio-header__topline { align-items: flex-start; flex-direction: column; }
+  .student-portfolio-header__topline p { font-size: 9px; }
+  .student-portfolio-back-button { align-self: flex-end; }
+  .student-portfolio-heading { margin-top: 46px; }
+  .student-portfolio-heading h1 { font-size: clamp(40px, 12vw, 62px); }
+  .student-portfolio-heading p { font-size: 11px; letter-spacing: .08em; }
+  .student-portfolio-grid { grid-template-columns: 1fr; gap: 42px; }
+  .portfolio-stamp,
+  .portfolio-stamp:nth-child(4),
+  .portfolio-stamp:nth-child(5) {
+    grid-column: auto;
+    width: 100%;
+    margin-left: 0;
+  }
+  .portfolio-stamp__stub { padding: 24px 18px; }
+  .portfolio-stamp__name { font-size: 13px; }
+  .portfolio-stamp__stub h2 { font-size: 25px; }
+  .student-portfolio-footer { flex-direction: column; gap: 8px; }
+  .portfolio-decor--top-left { top: 4px; left: -42px; transform: scale(.42) rotate(-8deg); }
+  .portfolio-decor--top-right { top: 3px; right: -24px; transform: scale(.42) rotate(9deg); }
+  .portfolio-decor--bottom-left { bottom: 96px; left: -70px; transform: scale(.5) rotate(13deg); }
+}

@@ -1,29 +1,38 @@
-.activity-teaser { min-height: 100vh; min-height: 100dvh; padding: clamp(118px, 14svh, 164px) 7vw 64px; background: #fff; }
-.activity-intro { display: flex; align-items: flex-start; justify-content: space-between; gap: 6vw; margin-bottom: clamp(36px, 6svh, 72px); }
-.activity-intro__heading { flex: 1 1 auto; min-width: 0; }
-.activity-intro .section-kicker { margin: 0; }
-.activity-intro h2 { margin: 22px 0 0; color: #111827; font-family: 'Noto Serif SC', serif; font-size: clamp(3rem, 5.1vw, 5.8rem); font-weight: 500; line-height: 1.14; letter-spacing: -.065em; }
-.activity-intro h2 span, .activity-intro h2 strong { display: block; }
-.activity-intro h2 span { font-size: .72em; font-weight: 500; }
-.activity-intro h2 strong { margin-top: .1em; color: #0f172a; font: inherit; }
-.activity-intro__body { flex: 0 0 270px; max-width: 320px; margin: 0; color: #64748b; font-size: 14px; font-weight: 500; line-height: 2; }
-.activity-gallery-meta { display: flex; justify-content: space-between; margin-bottom: 18px; color: #8a96a6; font: 600 10px 'Space Grotesk', 'Noto Sans SC', sans-serif; letter-spacing: .19em; }
-.activity-accordion-wrap { position: relative; }
-
-@media (min-width: 1600px) {
-  .activity-accordion-wrap .activity-accordion { height: clamp(420px, 46svh, 580px) !important; }
-}
-
-@media (max-width: 1000px) {
-  .activity-intro { gap: 24px; }
-  .activity-intro h2 { font-size: clamp(2.25rem, 5vw, 3.4rem); }
-  .activity-intro__body { flex-basis: 210px; font-size: 12px; }
-}
-
+.activity-teaser { display: grid; grid-template-rows: auto minmax(0, 1fr); gap: clamp(18px, 3dvh, 40px); }
+.activity-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 36%); grid-template-areas: 'heading description'; align-items: center; gap: 18px 5vw; }
+.activity-intro__heading { grid-area: heading; }
+.activity-intro h2 { margin: 0; color: #111827; font-family: 'Noto Serif SC', serif; font-size: clamp(30px, min(4.2vw, 6dvh), 72px); font-weight: 500; line-height: 1.18; letter-spacing: -.055em; }
+.activity-intro h2 > span, .activity-intro h2 > strong { display: block; }
+.activity-intro h2 > span { margin-bottom: 8px; font-size: .65em; font-weight: 500; color: #596b60; letter-spacing: .01em; }
+.activity-intro h2 strong { font: inherit; }
+.activity-intro__body { grid-area: description; min-width: 0; margin: 0; color: #f5f5f5; font-size: clamp(16px, 1vw, 18px); line-height: 1.85; }
+.activity-accordion-wrap { min-height: 0; }
+.activity-accordion-wrap .activity-accordion { height: 100% !important; min-height: 0; }
+.activity-accordion .ag-panel__media { filter: none; will-change: transform; }
+/* Keep the galaxy chapter readable without changing the gallery images. */
+.story-experience #activity.activity-teaser { color: #edf4f8; }
+.story-experience #activity .activity-intro h2 { color: #edf4f8; }
+.story-experience #activity .activity-intro .chapter-english { color: #fff; font-size: 20px; }
+.story-experience #activity .activity-intro__body { color: #fff; }
+.activity-intro .text-type { max-width: 100%; }
 @media (max-width: 767px) {
-  .activity-teaser { padding: 108px 5vw 64px; }
-  .activity-intro { display: block; margin-bottom: 32px; }
-  .activity-intro h2 { font-size: clamp(2rem, 8.7vw, 4rem); line-height: 1.2; }
-  .activity-intro__body { max-width: 310px; margin-top: 24px; font-size: 13px; }
-  .activity-gallery-meta { font-size: 9px; }
+  .activity-intro { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'heading' 'description'; gap: 12px; }
+  .story-experience #activity .activity-intro .chapter-english { font-size: 13px; }
+  .activity-intro h2 { font-size: clamp(25px, 6.8vw, 42px); }
+  .activity-intro__body { max-width: 440px; font-size: 14px; line-height: 1.8; }
+  .activity-accordion .ag-panel { min-height: 32px; }
+  .activity-accordion .ag-panel__label { left: 14px; right: 14px; bottom: 12px; }
+  .activity-accordion .ag-panel__text { font-size: 13px; }
+}
+@media (max-height: 600px) and (min-width: 768px) {
+  .activity-teaser { gap: 12px; }
+  .activity-intro { grid-template-columns: 1fr 42%; gap: 12px 20px; }
+  .activity-intro h2 { font-size: 24px; }
+  .activity-intro h2 > span { font-size: 14px; margin-bottom: 4px; }
+  .activity-intro__body { font-size: 14px; }
+}
+@media (max-height: 600px) and (max-width: 767px) {
+  .activity-teaser { gap: 12px; }
+  .activity-intro { gap: 8px; }
+  .activity-intro__body { font-size: 13px; line-height: 1.7; }
 }

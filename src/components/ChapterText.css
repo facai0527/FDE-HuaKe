@@ -1,0 +1,8 @@
+.chapter-tech-text { display: block; height: 2em; }
+.chapter-tech-paragraph { width: calc(100% + 24px); margin: -8px -12px; }
+.projects-english .chapter-tech-text { width: min(100%, 360px); height: clamp(32px, 4.4vw, 58px); margin: -8px 0 -8px -12px; }
+.activity-intro .chapter-english .chapter-tech-text { width: 240px; height: 34px; margin: -8px 0 -8px -12px; }
+@media (max-width: 767px) {
+  .projects-english .chapter-tech-text { width: 230px; height: 32px; }
+  .activity-intro .chapter-english .chapter-tech-text { width: 210px; height: 30px; }
+}

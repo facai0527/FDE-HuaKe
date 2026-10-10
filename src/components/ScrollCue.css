@@ -1,0 +1,24 @@
+.scroll-cue { position: absolute; z-index: 5; bottom: var(--scroll-cue-bottom); left: 50%; transform: translateX(-50%); }
+.scroll-cue__link { display: flex; width: 44px; min-height: 58px; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #bbc9d4; filter: drop-shadow(0 1px 2px #060b10) drop-shadow(0 0 1px #060b10); transition: color .2s ease; }
+.scroll-cue__link:hover { color: #fff; }
+.scroll-cue__link:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 6px; }
+.scroll-cue__mouse { position: relative; display: block; width: 23px; height: 35px; border: 1.5px solid currentColor; border-radius: 14px; }
+.scroll-cue__wheel { position: absolute; top: 6px; left: calc(50% - 1.5px); width: 3px; height: 7px; border-radius: 2px; background: currentColor; animation: scroll-cue-wheel 1.8s ease-in-out infinite; }
+.scroll-cue__direction, .scroll-cue__arrow { display: block; width: 6px; height: 6px; }
+.scroll-cue__arrow { border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); animation: scroll-cue-arrow 1.8s ease-in-out infinite; }
+.scroll-cue[data-returning-home='true'] .scroll-cue__direction { transform: rotate(180deg); }
+.scroll-cue[data-returning-home='true'] .scroll-cue__wheel { animation-direction: reverse; }
+.scroll-cue[data-paused='true'] .scroll-cue__wheel,
+.scroll-cue[data-paused='true'] .scroll-cue__arrow { animation-play-state: paused; }
+@keyframes scroll-cue-wheel {
+  0%, 15% { transform: translateY(0); opacity: 1; }
+  65%, 100% { transform: translateY(9px); opacity: 0; }
+}
+@keyframes scroll-cue-arrow {
+  0%, 15% { transform: translateY(0) rotate(45deg); opacity: .25; }
+  65% { transform: translateY(3px) rotate(45deg); opacity: .8; }
+  100% { transform: translateY(3px) rotate(45deg); opacity: .25; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue__wheel, .scroll-cue__arrow { animation: none; }
+}

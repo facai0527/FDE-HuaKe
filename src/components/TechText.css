@@ -1,9 +1,36 @@
 .tech-text {
+  display: inline-block;
   position: relative;
   width: 100%;
   height: 100%;
   touch-action: pan-y;
   user-select: none;
+  vertical-align: middle;
+}
+
+.tech-text-readable {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  font-size: min(var(--tech-text-font-size, 150px), 1em);
+  line-height: 1.25;
+}
+
+.tech-text[data-align='left'] .tech-text-readable {
+  justify-content: flex-start;
+}
+
+.tech-text[data-canvas-ready='true'] .tech-text-readable {
+  inset: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .tech-text-canvas {
@@ -11,3 +38,12 @@
   width: 100%;
   height: 100%;
 }
+
+.tech-text[data-multiline='true'] { display: block; height: auto; font-size: inherit; line-height: inherit; }
+.tech-text[data-multiline='true'] .tech-text-readable {
+  position: relative; inset: auto; display: block; width: auto; height: auto;
+  padding: 8px 12px; overflow: visible; clip-path: none; white-space: normal;
+  font-size: inherit; line-height: inherit; letter-spacing: inherit;
+}
+.tech-text[data-multiline='true'][data-canvas-ready='true'] .tech-text-readable { color: transparent; text-shadow: none; }
+.tech-text[data-multiline='true'] .tech-text-canvas { position: absolute; inset: 0; }
