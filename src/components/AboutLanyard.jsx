@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from 're
 import { createPortal } from 'react-dom';
 import { useStory } from './StoryContext';
 import StrokeText from './StrokeText';
+import { assetPath } from '../assetPath';
 import './AboutLanyard.css';
 
 const loadLanyard = () => import('./Lanyard');
@@ -78,7 +79,7 @@ export default function AboutLanyard() {
             frontContent={<div className="fde-card fde-card--front">
               <div className="fde-card__topline"><span>HUA KE FUTURE · FDE</span><span>FDE / 06</span></div>
               <div className="fde-card__identity">
-                <img src="/assets/huake-logo-transparent.png" alt="华科未来·FDE 标志" draggable={false} />
+                <img src={assetPath('assets/huake-logo-transparent.png')} alt="华科未来·FDE 标志" draggable={false} />
                 <div><h3>华科未来·FDE</h3><p>以共学，致未来。</p></div>
               </div>
               <div className="fde-card__rule" />

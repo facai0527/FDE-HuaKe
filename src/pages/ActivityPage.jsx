@@ -2,13 +2,14 @@ import AccordionGallery from '../components/AccordionGallery';
 import TextType from '../components/TextType';
 import ShinyText from '../components/ShinyText';
 import { useStory } from '../components/StoryContext';
+import { assetPath } from '../assetPath';
 import './ActivityPage.css';
 
 const activityImages = [
-  { image: '/assets/activity/activity-venue.jpg',  alt: '交流与分享空间的展示参考图' },
-  { image: '/assets/activity/activity-lounge.jpg',  alt: '相聚与讨论空间的展示参考图' },
-  { image: '/assets/activity/activity-studio.png',  alt: '工作坊与共创空间的展示参考图' },
-  { image: '/assets/activity/activity-night.png', alt: '活动现场的展示参考图' },
+  { image: assetPath('assets/activity/activity-venue.jpg'),  alt: '交流与分享空间的展示参考图' },
+  { image: assetPath('assets/activity/activity-lounge.jpg'),  alt: '相聚与讨论空间的展示参考图' },
+  { image: assetPath('assets/activity/activity-studio.png'),  alt: '工作坊与共创空间的展示参考图' },
+  { image: assetPath('assets/activity/activity-night.png'), alt: '活动现场的展示参考图' },
 ];
 
 export default function ActivityPage() {

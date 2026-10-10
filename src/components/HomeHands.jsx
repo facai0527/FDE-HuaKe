@@ -1,10 +1,11 @@
 import { useEffect, useRef } from 'react';
+import { assetPath } from '../assetPath';
 
 // Both crops are from the supplied reference; the photo shading stays visible
 // through the dot mask so the fingers, nails and mechanical joints read clearly.
 const HANDS = [
-  { side: 'human', source: '/assets/story-worlds/human-hand.webp' },
-  { side: 'robot', source: '/assets/story-worlds/robot-hand.webp' },
+  { side: 'human', source: assetPath('assets/story-worlds/human-hand.webp') },
+  { side: 'robot', source: assetPath('assets/story-worlds/robot-hand.webp') },
 ];
 
 export default function HomeHands({ active = true, paused = false, reducedMotion = false, transitioning = false }) {

@@ -4,19 +4,20 @@ import { useStory } from '../components/StoryContext';
 import ChapterText from '../components/ChapterText';
 import TextType from '../components/TextType';
 import ShinyText from '../components/ShinyText';
+import { assetPath } from '../assetPath';
 import './ProjectsPage.css';
 
 const projects = [
-  { title: '祈年殿', type: 'WEB EXPERIENCE', image: '/assets/projects/qiniandian.png',
+  { title: '祈年殿', type: 'WEB EXPERIENCE', image: assetPath('assets/projects/qiniandian.png'),
     alt: '祈年殿网站项目截图', href: 'https://facai0527.github.io/qiniandian/',
     description: '用交互呈现文化内容，探索让理解与参与更容易的方式。' },
-  { title: '山间一盏', type: 'STORYTELLING', image: '/assets/projects/tea-hero.png', fit: 'contain',
+  { title: '山间一盏', type: 'STORYTELLING', image: assetPath('assets/projects/tea-hero.png'), fit: 'contain',
     alt: '山间一盏茶叶网站项目截图', href: 'https://facai0527.github.io/tea-shichagundong/',
     description: '从一片茶叶的故事出发，练习内容、视觉与交互的共同表达。' },
-  { title: '小红书自动发布工作台', type: 'PRODUCT', image: '/assets/projects/xiaohongshu-matrix.png',
+  { title: '小红书自动发布工作台', type: 'PRODUCT', image: assetPath('assets/projects/xiaohongshu-matrix.png'),
     alt: '小红书矩阵运营工作台截图',
     description: '从具体工作环节出发，探索工具如何协作、流程如何推进。' },
-  { title: 'AIGC视频', type: 'FILM', video: '/assets/projects/fde-project.mp4#t=0.1',
+  { title: 'AIGC视频', type: 'FILM', video: `${assetPath('assets/projects/fde-project.mp4')}#t=0.1`,
     description: '记录动手、交流与复盘，让实践中的经验可以被分享。' },
 ];
 

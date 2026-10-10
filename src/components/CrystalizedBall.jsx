@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { Renderer, Program, Mesh, Triangle, Geometry, RenderTarget, Texture } from 'ogl';
 import { createLaserFlowUniforms, laserFlowFragment, LASER_BASE, LASER_HEIGHT } from './LaserFlow';
+import { assetPath } from '../assetPath';
 
 import './CrystalizedBall.css';
 
@@ -1993,7 +1994,7 @@ const CrystalizedBall = ({
       }
       start();
     };
-    logoImage.src = '/assets/huake-logo-particles.png';
+    logoImage.src = assetPath('assets/huake-logo-particles.png');
     resize();
 
     return () => {

@@ -1,4 +1,6 @@
 // Names, summaries and links come from handoff/prompts/student-cases.txt.
+import { assetPath } from '../assetPath';
+
 export const studentCases = [
   {
     id: 'travel',
@@ -8,7 +10,7 @@ export const studentCases = [
     subtitle: '跟着心情去旅行',
     category: '智能旅行规划',
     description: '把实时天气与心情，变成一份可以出发的行程。',
-    image: '/assets/cases/case-travel.png',
+    image: assetPath('assets/cases/case-travel.png'),
     href: 'https://workbuddy.link/p/Cm3OQDTBUDYIHD774bHDtl',
     dark: true,
     rotation: -2,
@@ -22,7 +24,7 @@ export const studentCases = [
     subtitle: '从选题到分镜的一站式工作流',
     category: '内容创作工具',
     description: '让灵感进入看板，让剧本、分镜和提示词连成工作流。',
-    image: '/assets/cases/case-video.png',
+    image: assetPath('assets/cases/case-video.png'),
     href: 'https://www.workbuddy.link/p/UWBtzRCQeQkiXhLKUxKEM8?source=2',
     rotation: 1.5,
     highlights: ['五阶段看板串起灵感、大纲、剧本、分镜与出片。', '主角设定与可复用提示词帮助保持角色一致。', '云端多端同步，表单自动暂存，断网可本地降级。'],
@@ -35,7 +37,7 @@ export const studentCases = [
     subtitle: '学生求职工作台 · 通用公共模板版',
     category: '求职管理工具',
     description: '从岗位收藏到面试复盘，让求职的每一步都有迹可循。',
-    image: '/assets/cases/case-job.png',
+    image: assetPath('assets/cases/case-job.png'),
     href: 'https://www.workbuddy.link/p/Y1cFy13FCShcmTCfXn51k2',
     rotation: -1.5,
     highlights: ['职业档案作为共同数据源，十二个模块自动联动。', '岗位匹配展示评分依据，简历与经历按方向定制。', '复盘结论回流为补强任务，支持本地备份与还原。'],
@@ -48,7 +50,7 @@ export const studentCases = [
     subtitle: '比亚迪高端品牌矩阵 2026 新品发布会',
     category: '交互发布会',
     description: '用一场可交互的发布会，把品牌主张讲成完整故事。',
-    image: '/assets/cases/case-byd.png',
+    image: assetPath('assets/cases/case-byd.png'),
     href: 'https://workbuddy.link/p/gBelve9HPLFum7F2u8NWxV',
     dark: true,
     rotation: 1,
@@ -62,7 +64,7 @@ export const studentCases = [
     subtitle: '朱莉 · 留学规划顾问（深圳）',
     category: '个人品牌网站',
     description: '从服务边界到真实案例，把专业经验讲得清楚、可信。',
-    image: '/assets/cases/case-consulting.png',
+    image: assetPath('assets/cases/case-consulting.png'),
     href: 'https://workbuddy.link/p/TDvhRUIa6uz1NN4a5mdNaQ?source=2',
     rotation: -1,
     highlights: ['面向企业主家庭，明确服务定位与可交付的流程。', '脱敏案例与常见问题说明能力边界，不承诺录取。', '预约与联系方式组成清晰的咨询入口。'],

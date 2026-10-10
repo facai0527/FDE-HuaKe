@@ -1,7 +1,8 @@
 import { useId } from 'react';
+import { assetPath } from '../assetPath';
 import './SmoothMetalLogo.css';
 
-const WORDMARK = '/assets/huake-official-wordmark.svg';
+const WORDMARK = assetPath('assets/huake-official-wordmark.svg');
 
 /** The official vector silhouette, lit as polished chrome without a grain layer. */
 export default function SmoothMetalLogo({ paused = false, reducedMotion = false }) {
